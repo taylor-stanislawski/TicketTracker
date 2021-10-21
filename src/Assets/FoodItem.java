@@ -46,5 +46,12 @@ public class FoodItem {
 				"Item Price: $" + this.price;
 		return result;
 	}
+	public String toStringGUI() {//had to make this to make the GUI look better
+		String result = "";
+		result += " Item ID: " + this.id + " | " +
+				"Item Name: " + this.name + " | " +
+				"Item Price: $" + this.price;
+		return result;
+	}
 	
 }
