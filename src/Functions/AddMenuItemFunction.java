@@ -19,11 +19,13 @@ public class AddMenuItemFunction {
 		FoodItems = sortFoodList(FoodItems);
 	}
 	
-	public void RemoveItem(int id) {
+	public boolean RemoveItem(int id) {
+		boolean removed = false;
 		for (int i=0; i<FoodItems.size(); i++) {
 			FoodItem item = FoodItems.get(i);
 			if(item.getId()==id) {
 				FoodItems.remove(i);
+				removed = true;
 				try {
 					ItemListToText(FoodItems);
 				} catch (IOException e) {
@@ -32,7 +34,28 @@ public class AddMenuItemFunction {
 				}
 			}
 		}
+		
 		FoodItems = sortFoodList(FoodItems);
+		return removed;
+	}
+	
+	public FoodItem GetItem(int id) {
+		FoodItem thisItem = null;
+		for (int i=0; i<FoodItems.size(); i++) {
+			FoodItem item = FoodItems.get(i);
+			if(item.getId()==id) {
+				thisItem=FoodItems.get(i);
+				try {
+					ItemListToText(FoodItems);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		FoodItems = sortFoodList(FoodItems);
+		return thisItem;
 	}
 	
 	public boolean idExists(int id) {//tests to see if the ID exists in the database. returns true if so
@@ -76,7 +99,8 @@ public class AddMenuItemFunction {
 	public void ItemListToText(ArrayList<FoodItem> FoodItems) throws IOException {
 		FoodItems = sortFoodList(FoodItems);
 		FileWriter myWriter;	
-			myWriter = new FileWriter("MenuItemList.txt");
+		myWriter = new FileWriter("MenuItemList.txt");
+		
 		for (int i=0; i<FoodItems.size(); i++) {
 			
 	        try {
