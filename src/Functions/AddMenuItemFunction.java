@@ -16,6 +16,7 @@ public class AddMenuItemFunction {
 	public void AddSingleItem(int id, String name, float newPrice){
 		FoodItem item = new FoodItem(id, name, newPrice);//make the food item
 	    FoodItems.add(item);//add it to the list (this does not add to the file)
+		FoodItems = sortFoodList(FoodItems);
 	}
 	
 	public void RemoveItem(int id) {
@@ -31,6 +32,7 @@ public class AddMenuItemFunction {
 				}
 			}
 		}
+		FoodItems = sortFoodList(FoodItems);
 	}
 	
 	public boolean idExists(int id) {//tests to see if the ID exists in the database. returns true if so
@@ -68,6 +70,7 @@ public class AddMenuItemFunction {
 				}
 			}
 		}
+		FoodItems = sortFoodList(FoodItems);
 	}
 	
 	public void ItemListToText(ArrayList<FoodItem> FoodItems) throws IOException {
@@ -91,6 +94,8 @@ public class AddMenuItemFunction {
 		FoodItem item = new FoodItem(id, name, itemPrice);
 	    FoodItems.add(item);
 	    
+		FoodItems = sortFoodList(FoodItems);
+	    
 	    try {//file writer for writing to the file
 	        FileWriter myWriter = new FileWriter("MenuItemList.txt", true);
 	        myWriter.write("\n" + id + " " + name + " " + itemPrice);
@@ -100,7 +105,6 @@ public class AddMenuItemFunction {
 	        System.out.println("An error occurred.");
 	        e.printStackTrace();
 	      }
-	    FoodItems = sortFoodList(FoodItems);
 	}
 	
 	public void AddItemsFromText(String fileName) throws IOException {//read text file and import fooditems
