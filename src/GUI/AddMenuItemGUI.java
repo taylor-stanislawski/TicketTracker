@@ -83,7 +83,6 @@ public class AddMenuItemGUI {
 			
 			public void mouseClicked(MouseEvent e) {
 			try {
-				AddMenuItemFunction re = new AddMenuItemFunction();
 				String id = textField.getText();//get our id
 				String name = textField_1.getText();//get our name
 				String price = textField_2.getText();//get price
@@ -91,6 +90,7 @@ public class AddMenuItemGUI {
 				int idInt = Integer.parseInt(id);//convert id to integer
 				System.out.println(isInteger(name));
 				
+				AddMenuItemFunction re = new AddMenuItemFunction();
 				if(re.idExists(idInt)==false) {
 
 				if(isInteger(name)==true) {//name cannot be an integer
@@ -240,13 +240,15 @@ public class AddMenuItemGUI {
 						if (text == null || text.isEmpty()) {//if text is empty, assign 9999 which will never be item id. this will then not allow you to edit blank id
 							text = "9999";
 						}
+						
 						int thisId = Integer.parseInt(text);
+							
 						if(re.idExists(thisId)==true){//tests to see if the id exists in our database
 						String id = textField.getText();
 						JPanel removecontentPane;
-						JTextField textField;
-						JTextField textField_1;
-						JTextField textField_2;
+						JTextField edittextField;
+						JTextField edittextField_1;
+						JTextField edittextField_2;
 						
 						JFrame removeFrame = new JFrame();
 						removeFrame.setVisible(true);
@@ -267,45 +269,75 @@ public class AddMenuItemGUI {
 						lblNewLabel_1.setBounds(53, 52, 15, 14);
 						removecontentPane.add(lblNewLabel_1);
 						
-						textField = new JTextField();
-						textField.setBounds(88, 48, 86, 20);
-						removecontentPane.add(textField);
-						textField.setColumns(10);
+						edittextField = new JTextField();
+						edittextField.setBounds(88, 48, 86, 20);
+						removecontentPane.add(edittextField);
+						edittextField.setColumns(10);
 						
 						JLabel lblNewLabel_2 = new JLabel("Name:");
 						lblNewLabel_2.setBounds(53, 79, 46, 14);
 						removecontentPane.add(lblNewLabel_2);
 						
-						textField_1 = new JTextField();
-						textField_1.setBounds(88, 76, 86, 20);
-						removecontentPane.add(textField_1);
-						textField_1.setColumns(10);
+						edittextField_1 = new JTextField();
+						edittextField_1.setBounds(88, 76, 86, 20);
+						removecontentPane.add(edittextField_1);
+						edittextField_1.setColumns(10);
 						
 						JLabel lblNewLabel_3 = new JLabel("Price:");
 						lblNewLabel_3.setBounds(53, 107, 27, 14);
 						removecontentPane.add(lblNewLabel_3);
 						
-						textField_2 = new JTextField();
-						textField_2.setBounds(88, 104, 86, 20);
-						removecontentPane.add(textField_2);
-						textField_2.setColumns(10);
+						edittextField_2 = new JTextField();
+						edittextField_2.setBounds(88, 104, 86, 20);
+						removecontentPane.add(edittextField_2);
+						edittextField_2.setColumns(10);
 						
 						JButton btnNewButton = new JButton("Save");
 						btnNewButton.addMouseListener(new MouseAdapter() {
 							@Override
 							public void mouseClicked(MouseEvent e) {
-								String idString = textField.getText();
-								String newName = textField_1.getText();
-								String newPrice = textField_2.getText();
+								String idString = edittextField.getText();
+								String newName = edittextField_1.getText();
+								String newPrice = edittextField_2.getText();
 								
-								int editId = Integer.parseInt(id);
+								int editId = Integer.parseInt(idString);
 								
-								AddMenuItemFunction re = new AddMenuItemFunction();
-								re.EditItem(editId, idString, newName, newPrice);//run the changes to the function
+								if(re.idExists(editId)==false) {
+								
+								re.EditItem(thisId, idString, newName, newPrice);//run the changes to the function
 								removeFrame.dispose();
 								frame.dispose();
 								AddMenuItemGUI re1 = new AddMenuItemGUI();
 								re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
+								} else {
+									textField.setText("");
+									JPanel invalidcontentPane;
+									
+									JFrame invalidFrame = new JFrame();
+									invalidFrame.setVisible(true);
+									
+									invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+									invalidFrame.setBounds(100, 100, 298, 114);
+									invalidcontentPane = new JPanel();
+									invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+									invalidFrame.setContentPane(invalidcontentPane);
+									invalidcontentPane.setLayout(null);
+									
+									JLabel lblNewLabel = new JLabel("You entered an ID that is already in use");
+									lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+									lblNewLabel.setBounds(20, 11, 262, 14);
+									invalidcontentPane.add(lblNewLabel);
+									
+									JButton btnNewButton = new JButton("Okay");
+									btnNewButton.addMouseListener(new MouseAdapter() {
+										@Override
+										public void mouseClicked(MouseEvent e) {
+											invalidFrame.dispose();
+										}
+									});
+									btnNewButton.setBounds(96, 47, 89, 23);
+									invalidcontentPane.add(btnNewButton);
+								}
 							}
 						});
 						btnNewButton.setBounds(73, 132, 89, 23);
