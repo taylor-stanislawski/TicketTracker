@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class AddMenuItemFunction {
@@ -69,6 +71,7 @@ public class AddMenuItemFunction {
 	}
 	
 	public void ItemListToText(ArrayList<FoodItem> FoodItems) throws IOException {
+		FoodItems = sortFoodList(FoodItems);
 		FileWriter myWriter;	
 			myWriter = new FileWriter("MenuItemList.txt");
 		for (int i=0; i<FoodItems.size(); i++) {
@@ -97,6 +100,7 @@ public class AddMenuItemFunction {
 	        System.out.println("An error occurred.");
 	        e.printStackTrace();
 	      }
+	    FoodItems = sortFoodList(FoodItems);
 	}
 	
 	public void AddItemsFromText(String fileName) throws IOException {//read text file and import fooditems
@@ -154,4 +158,15 @@ public class AddMenuItemFunction {
     
     sc.close();
 }
+	public ArrayList<FoodItem> sortFoodList(ArrayList<FoodItem> FoodList) {
+		Collections.sort(FoodList, new Comparator<FoodItem>(){
+		    public int compare(FoodItem s1, FoodItem s2) {
+		        return Integer.compare(s1.getId(), s2.getId());
+		    }
+		});
+		for(int i=0; i<FoodList.size(); i++) {
+	    	System.out.println(FoodList.get(i).toString());
+	    }
+		return FoodList;
+	}
 }
