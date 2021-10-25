@@ -1,3 +1,6 @@
+package GUI;
+
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -19,6 +22,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import Assets.FoodItem;
+import Functions.AddMenuItemFunction;
 
 public class AddMenuItemGUI {
 	/**
@@ -202,4 +208,22 @@ public class AddMenuItemGUI {
 	    }
 	    return true;
 	}
+	
+	/*
+	public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    AddMenuItemFunction re = new AddMenuItemFunction();
+                    String fileName = "MenuItemList.txt";
+                    re.AddItemsFromText(fileName);
+
+                    AddMenuItemGUI re1 = new AddMenuItemGUI();
+
+                    re1.AddMenuItemGUI(re.FoodItems);//run gui with fooditems list
+                } catch (Exception e) {}
+            }
+        });
+    }
+    */
 }

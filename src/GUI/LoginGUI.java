@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
-public class loginGUI {
+public class LoginGUI {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -21,7 +21,7 @@ public class loginGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loginGUI window = new loginGUI();
+					LoginGUI window = new LoginGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class loginGUI {
 	/**
 	 * Create the application.
 	 */
-	public loginGUI() {
+	public LoginGUI() {
 		initialize();
 	}
 
