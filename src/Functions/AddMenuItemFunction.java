@@ -109,7 +109,7 @@ public class AddMenuItemFunction {
 		for (int i=0; i<FoodItems.size(); i++) {
 			
 	        try {
-				myWriter.write("\n" + FoodItems.get(i).getId() + " " + FoodItems.get(i).getName() + " " + FoodItems.get(i).getPrice());
+				myWriter.write(FoodItems.get(i).getId() + " " + FoodItems.get(i).getName() + " " + FoodItems.get(i).getPrice() + "\n");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
