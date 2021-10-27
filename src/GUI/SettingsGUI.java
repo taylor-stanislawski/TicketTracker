@@ -56,8 +56,8 @@ public class SettingsGUI {
 		lblNewLabel.setBounds(133, 11, 187, 35);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Edit Menu");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton editMenuButton = new JButton("Edit Menu");
+		editMenuButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				AddMenuItemFunction re = new AddMenuItemFunction();
@@ -73,17 +73,21 @@ public class SettingsGUI {
 				                    re1.AddMenuItemGUI(re.FoodItems);//run gui with fooditems list
 			}
 		});
-		btnNewButton.setBounds(157, 91, 138, 23);
-		frame.getContentPane().add(btnNewButton);
+		editMenuButton.setBounds(157, 81, 138, 23);
+		frame.getContentPane().add(editMenuButton);
 		
-		JButton btnEditEmployees = new JButton("Edit Employees");
-		btnEditEmployees.addMouseListener(new MouseAdapter() {
+		JButton addEmployeeButton = new JButton("Add Employee");
+		addEmployeeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 			}
 		});
-		btnEditEmployees.setBounds(157, 119, 138, 23);
-		frame.getContentPane().add(btnEditEmployees);
+		addEmployeeButton.setBounds(157, 107, 138, 23);
+		frame.getContentPane().add(addEmployeeButton);
+		
+		JButton removeEmployeeButton = new JButton("Remove Employee");
+		removeEmployeeButton.setBounds(157, 134, 138, 23);
+		frame.getContentPane().add(removeEmployeeButton);
 	}
 }
