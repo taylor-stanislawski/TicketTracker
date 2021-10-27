@@ -1,19 +1,16 @@
 
-0 Water 2.0
-1 Milk 4.0
-2 CocaCola 3.0
-3 Sprite 3.0
-4 Lemonade 3.0
-5 GrapeJuice 3.0
-6 Hamburger 7.0
-7 Hotdog 3.0
+
+1 Milk 3.0
+2 Water 1.0
+3 Beer 2.0
+4 Lemonade 2.0
+5 Carbonated-Milk 3.0
+6 Trout-Fish 8.0
 8 ChickenNoodleSoup 5.0
 9 Steak 10.0
-10 Salad 5.0
-10 Fries 4.0
+11 Fries 4.0
 12 Chips 3.0
 13 Nachoes 5.0
-14 Dinner-roles 4.0
+14 Roles 2.0
 15 Rice 4.0
 16 Ravioli 5.0
-17 Pizza 3.0
