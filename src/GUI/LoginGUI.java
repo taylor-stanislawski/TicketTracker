@@ -22,7 +22,7 @@ public class LoginGUI {
 			public void run() {
 				try {
 					LoginGUI window = new LoginGUI();
-					window.frame.setVisible(true);
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,39 +41,47 @@ public class LoginGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 349, 297);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setFrame(new JFrame());
+		getFrame().setBounds(100, 100, 349, 297);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Ticket Tracker Login");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(55, 0, 213, 26);
-		frame.getContentPane().add(lblNewLabel);
+		getFrame().getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Employee ID:");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(86, 34, 150, 26);
-		frame.getContentPane().add(lblNewLabel_1);
+		getFrame().getContentPane().add(lblNewLabel_1);
 		
 		textField = new JTextField();
 		textField.setBounds(68, 61, 186, 32);
-		frame.getContentPane().add(textField);
+		getFrame().getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Password:");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(101, 107, 121, 26);
-		frame.getContentPane().add(lblNewLabel_2);
+		getFrame().getContentPane().add(lblNewLabel_2);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(68, 136, 186, 32);
-		frame.getContentPane().add(textField_1);
+		getFrame().getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setBounds(91, 180, 141, 35);
-		frame.getContentPane().add(btnNewButton);
+		getFrame().getContentPane().add(btnNewButton);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 
 }
