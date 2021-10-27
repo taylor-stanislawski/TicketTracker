@@ -1,33 +1,128 @@
 package Functions;
 
-import java.awt.EventQueue;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import Assets.FoodItem;
-import GUI.AddMenuItemGUI;
 
 public class AddMenuItemFunction {
 	
 	ArrayList<String> listOfFoodItems = new ArrayList<>();
     ArrayList<String> listOfCategories = new ArrayList<>();//categories if we decide to do that
     
-    public static ArrayList<FoodItem> FoodItems = new ArrayList<>();//the fooditems list
+   public static ArrayList<FoodItem> FoodItems = new ArrayList<>();//the fooditems list
 	
-	public void AddSingleItem(int id, String name, float itemPrice){
-		FoodItem item = new FoodItem(id, name, itemPrice);//make the food item
+	public void AddSingleItem(int id, String name, float newPrice){
+		FoodItem item = new FoodItem(id, name, newPrice);//make the food item
 	    FoodItems.add(item);//add it to the list (this does not add to the file)
+		FoodItems = sortFoodList(FoodItems);
+	}
+	
+	public boolean RemoveItem(int id) {
+		boolean removed = false;
+		for (int i=0; i<FoodItems.size(); i++) {
+			FoodItem item = FoodItems.get(i);
+			if(item.getId()==id) {
+				FoodItems.remove(i);
+				removed = true;
+				try {
+					ItemListToText(FoodItems);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		FoodItems = sortFoodList(FoodItems);
+		return removed;
+	}
+	
+	public FoodItem GetItem(int id) {
+		FoodItem thisItem = null;
+		for (int i=0; i<FoodItems.size(); i++) {
+			FoodItem item = FoodItems.get(i);
+			if(item.getId()==id) {
+				thisItem=FoodItems.get(i);
+				try {
+					ItemListToText(FoodItems);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		FoodItems = sortFoodList(FoodItems);
+		return thisItem;
+	}
+	
+	public boolean idExists(int id) {//tests to see if the ID exists in the database. returns true if so
+		boolean doesExist = false;
+		for (int i=0; i<FoodItems.size(); i++) {
+			FoodItem item = FoodItems.get(i);
+			if(item.getId()==id) {
+				doesExist = true;
+			}
+		}
+		return doesExist;
+	}
+	
+	public void EditItem(int id, String newid, String newName, String itemPrice) {//edditing item in the database
+		for (int i=0; i<FoodItems.size(); i++) {
+			FoodItem item = FoodItems.get(i);
+			if(item.getId()==id) {
+				if (newName != null && !newName.isEmpty()) {//if statements for each seperatly allow changes to individual id, name or price
+					FoodItems.get(i).setName(newName);
+				}
+				if(newid != null && !newid.isEmpty()) {
+					int itemId = Integer.parseInt(newid);
+					FoodItems.get(i).setId(itemId);
+				}
+				if (itemPrice != null && !itemPrice.isEmpty()) {
+					float newPrice = Float.parseFloat(itemPrice);
+					FoodItems.get(i).setPrice(newPrice);
+				}
+				
+				try {
+					ItemListToText(FoodItems);//export to text with our updated list
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		FoodItems = sortFoodList(FoodItems);
+	}
+	
+	public void ItemListToText(ArrayList<FoodItem> FoodItems) throws IOException {
+		FoodItems = sortFoodList(FoodItems);
+		FileWriter myWriter;	
+		myWriter = new FileWriter("MenuItemList.txt");
+		
+		for (int i=0; i<FoodItems.size(); i++) {
+			
+	        try {
+				myWriter.write("\n" + FoodItems.get(i).getId() + " " + FoodItems.get(i).getName() + " " + FoodItems.get(i).getPrice());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+        myWriter.close();
 	}
 	
 	public void AddSingleItemtoText(int id, String name, float itemPrice){//add to the list and to the file
 		FoodItem item = new FoodItem(id, name, itemPrice);
 	    FoodItems.add(item);
+	    
+		FoodItems = sortFoodList(FoodItems);
 	    
 	    try {//file writer for writing to the file
 	        FileWriter myWriter = new FileWriter("MenuItemList.txt", true);
@@ -95,5 +190,15 @@ public class AddMenuItemFunction {
     
     sc.close();
 }
-	
+	public ArrayList<FoodItem> sortFoodList(ArrayList<FoodItem> FoodList) {
+		Collections.sort(FoodList, new Comparator<FoodItem>(){
+		    public int compare(FoodItem s1, FoodItem s2) {
+		        return Integer.compare(s1.getId(), s2.getId());
+		    }
+		});
+		for(int i=0; i<FoodList.size(); i++) {
+	    	System.out.println(FoodList.get(i).toString());
+	    }
+		return FoodList;
+	}
 }
