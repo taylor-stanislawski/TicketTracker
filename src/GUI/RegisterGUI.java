@@ -14,6 +14,8 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import Functions.RegisterFunction;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegisterGUI {
 

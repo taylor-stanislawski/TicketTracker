@@ -22,13 +22,9 @@ public class LoginGUI {
 	
 	
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 349, 297);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 353, 442);
-		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame().getContentPane().setLayout(null);
 		
 		JLabel ticketLabel = new JLabel("Ticket Tracker Login");
