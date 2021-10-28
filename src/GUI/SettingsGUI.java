@@ -80,15 +80,23 @@ public class SettingsGUI {
 		addEmployeeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				RegisterGUI register = new RegisterGUI();
+				register.getFrame().setVisible(true);
 			}
 		});
 		addEmployeeButton.setBounds(157, 107, 138, 23);
-		getFrame().getContentPane().add(addEmployeeButton);
+		frame.getContentPane().add(addEmployeeButton);
 		
 		JButton removeEmployeeButton = new JButton("Remove Employee");
+		removeEmployeeButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				RemoveEmployeeGUI remove = new RemoveEmployeeGUI();
+				remove.getFrame().setVisible(true);
+			}
+		});
 		removeEmployeeButton.setBounds(157, 134, 138, 23);
-		getFrame().getContentPane().add(removeEmployeeButton);
+		frame.getContentPane().add(removeEmployeeButton);
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.addMouseListener(new MouseAdapter() {
