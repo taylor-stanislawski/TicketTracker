@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
@@ -73,18 +74,23 @@ public class RemoveEmployeeGUI {
 		idLabel.setBounds(159, 106, 165, 14);
 		getFrame().getContentPane().add(idLabel);
 		
+		ButtonGroup group = new ButtonGroup();
+		
 		JRadioButton cookButton = new JRadioButton("Cook");
 		cookButton.setSelected(true);
 		cookButton.setBounds(187, 166, 109, 23);
 		getFrame().getContentPane().add(cookButton);
+		group.add(cookButton);
 		
 		JRadioButton waiterButton = new JRadioButton("Waiter");
 		waiterButton.setBounds(187, 192, 109, 23);
 		getFrame().getContentPane().add(waiterButton);
+		group.add(waiterButton);
 		
 		JRadioButton managerButton = new JRadioButton("Manager");
 		managerButton.setBounds(187, 218, 109, 23);
 		getFrame().getContentPane().add(managerButton);
+		group.add(managerButton);
 		
 		JButton removeEmployeeButton = new JButton("Remove Employee");
 		removeEmployeeButton.addMouseListener(new MouseAdapter() {
