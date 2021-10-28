@@ -202,6 +202,8 @@ public class AddMenuItemGUI {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				AddMenuItemFunction re = new AddMenuItemFunction();
+				re.FoodItems.clear();
 				frame.dispose();
 			}
 		});
