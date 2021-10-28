@@ -359,7 +359,14 @@ public class AddMenuItemGUI {
 								AddMenuItemGUI re1 = new AddMenuItemGUI();
 								re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
 								} else {
-									if (emptyIns==false) {
+									if (editId==theId) {
+										re.EditItem(theId, idString, newName, newPrice);//run the changes to the function
+										removeFrame.dispose();
+										frame.dispose();
+										AddMenuItemGUI re1 = new AddMenuItemGUI();
+										re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
+									}
+									else if (emptyIns==false) {
 									textField.setText("");
 									JPanel invalidcontentPane;
 									
