@@ -141,7 +141,7 @@ public class AddMenuItemGUI {
 				JFrame invalidFrame = new JFrame();
 				invalidFrame.setVisible(true);
 				
-				invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				invalidFrame.setBounds(100, 100, 298, 114);
 				invalidcontentPane = new JPanel();
 				invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -167,7 +167,7 @@ public class AddMenuItemGUI {
 			catch (NumberFormatException ex) {//if either id or price arent ints, it will throw this exception
 				JLayeredPane testcontentPane;//same error comes up as when name is an int
 				testFrame.setVisible(true);
-				testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				testFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				testFrame.setBounds(100, 100, 638, 200);
 				testcontentPane = new JLayeredPane();
 				testcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -216,7 +216,7 @@ public class AddMenuItemGUI {
 				JTextField textField;
 				JFrame removeframe = new JFrame();
 				removeframe.setVisible(true);
-				removeframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				removeframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				removeframe.setBounds(100, 100, 319, 152);
 				removecontentPane = new JPanel();
 				removecontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -258,7 +258,7 @@ public class AddMenuItemGUI {
 							JFrame invalidFrame = new JFrame();
 							invalidFrame.setVisible(true);
 							
-							invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 							invalidFrame.setBounds(100, 100, 298, 114);
 							invalidcontentPane = new JPanel();
 							invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -293,7 +293,7 @@ public class AddMenuItemGUI {
 						JFrame removeFrame = new JFrame();
 						removeFrame.setVisible(true);
 						
-						removeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						removeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						removeFrame.setBounds(100, 100, 450, 150);
 						removecontentPane = new JPanel();
 						contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -399,7 +399,7 @@ public class AddMenuItemGUI {
 						JFrame invalidFrame = new JFrame();
 						invalidFrame.setVisible(true);
 						
-						invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						invalidFrame.setBounds(100, 100, 298, 114);
 						invalidcontentPane = new JPanel();
 						invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -443,7 +443,7 @@ public class AddMenuItemGUI {
 				JTextField textField;
 				JFrame removeframe = new JFrame();
 				removeframe.setVisible(true);
-				removeframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				removeframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				removeframe.setBounds(100, 100, 319, 152);
 				removecontentPane = new JPanel();
 				removecontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -481,7 +481,7 @@ public class AddMenuItemGUI {
 							JFrame invalidFrame = new JFrame();
 							invalidFrame.setVisible(true);
 							
-							invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 							invalidFrame.setBounds(100, 100, 298, 114);
 							invalidcontentPane = new JPanel();
 							invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -515,7 +515,7 @@ public class AddMenuItemGUI {
 							JFrame invalidFrame = new JFrame();
 							invalidFrame.setVisible(true);
 							
-							invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 							invalidFrame.setBounds(100, 100, 298, 114);
 							invalidcontentPane = new JPanel();
 							invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
