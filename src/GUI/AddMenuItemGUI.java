@@ -137,7 +137,7 @@ public class AddMenuItemGUI {
 						JFrame invalidFrame = new JFrame();
 						invalidFrame.setVisible(true);
 						
-						invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						invalidFrame.setBounds(100, 100, 298, 114);
 						invalidcontentPane = new JPanel();
 						invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -391,7 +391,7 @@ public class AddMenuItemGUI {
 								JFrame invalidFrame = new JFrame();
 								invalidFrame.setVisible(true);
 								
-								invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 								invalidFrame.setBounds(100, 100, 298, 114);
 								invalidcontentPane = new JPanel();
 								invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -425,7 +425,7 @@ public class AddMenuItemGUI {
 										JFrame invalidFrame = new JFrame();
 										invalidFrame.setVisible(true);
 										
-										invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+										invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 										invalidFrame.setBounds(100, 100, 298, 114);
 										invalidcontentPane = new JPanel();
 										invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -456,7 +456,7 @@ public class AddMenuItemGUI {
 									JFrame invalidFrame = new JFrame();
 									invalidFrame.setVisible(true);
 									
-									invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+									invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 									invalidFrame.setBounds(100, 100, 298, 114);
 									invalidcontentPane = new JPanel();
 									invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -639,7 +639,7 @@ public class AddMenuItemGUI {
 						JFrame invalidFrame = new JFrame();
 						invalidFrame.setVisible(true);
 						
-						invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						invalidFrame.setBounds(100, 100, 298, 114);
 						invalidcontentPane = new JPanel();
 						invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
