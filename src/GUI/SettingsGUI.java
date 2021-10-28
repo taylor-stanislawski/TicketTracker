@@ -47,7 +47,7 @@ public class SettingsGUI {
 	private void initialize() {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 469, 276);
-		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame().getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Settings");
@@ -89,6 +89,26 @@ public class SettingsGUI {
 		JButton removeEmployeeButton = new JButton("Remove Employee");
 		removeEmployeeButton.setBounds(157, 134, 138, 23);
 		getFrame().getContentPane().add(removeEmployeeButton);
+		
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							LoginGUI window = new LoginGUI();
+							window.getFrame().setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				frame.dispose();
+			}
+		});
+		btnLogout.setBounds(157, 161, 138, 23);
+		frame.getContentPane().add(btnLogout);
+		
 	}
 
 	public JFrame getFrame() {

@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 public class LoginGUI {
 
 	private JFrame frame;
-	private JTextField textField;
 
 	public LoginGUI() {
 		initialize();
@@ -102,7 +101,6 @@ public class LoginGUI {
 								loginLabel.setText("Incorrect Login");
 							}
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -125,11 +123,10 @@ public class LoginGUI {
 								loginLabel.setText("Incorrect Login");
 							}
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
-					else {
+					else if(managerButton.isSelected()) {
 						//open Manager window
 						try {
 							if(LoginFunction.login(ID, pass, "Manager") == true) {
@@ -148,9 +145,11 @@ public class LoginGUI {
 								loginLabel.setText("Incorrect Login");
 							}
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+					}
+					else {
+						loginLabel.setText("Please select a role");
 					}
 				}
 

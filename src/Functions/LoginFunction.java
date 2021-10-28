@@ -42,14 +42,8 @@ public class LoginFunction {
 				verifyUser = 1;
 				verifyPass = 1;
 			}
-			System.out.println(IDList.get(i));
-			System.out.println(passList.get(i));
 		}
-		System.out.println(ID);
-		System.out.println(pass);
 
-		
-		
 		if(verifyUser != 0 && verifyPass != 0) {
 			return true;
 		} else {
