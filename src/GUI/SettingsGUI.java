@@ -26,7 +26,7 @@ public class SettingsGUI {
 			public void run() {
 				try {
 					SettingsGUI window = new SettingsGUI();
-					window.frame.setVisible(true);
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,16 +45,16 @@ public class SettingsGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 469, 276);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setFrame(new JFrame());
+		getFrame().setBounds(100, 100, 469, 276);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Settings");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(133, 11, 187, 35);
-		frame.getContentPane().add(lblNewLabel);
+		getFrame().getContentPane().add(lblNewLabel);
 		
 		JButton editMenuButton = new JButton("Edit Menu");
 		editMenuButton.addMouseListener(new MouseAdapter() {
@@ -74,7 +74,7 @@ public class SettingsGUI {
 			}
 		});
 		editMenuButton.setBounds(157, 81, 138, 23);
-		frame.getContentPane().add(editMenuButton);
+		getFrame().getContentPane().add(editMenuButton);
 		
 		JButton addEmployeeButton = new JButton("Add Employee");
 		addEmployeeButton.addMouseListener(new MouseAdapter() {
@@ -84,10 +84,18 @@ public class SettingsGUI {
 			}
 		});
 		addEmployeeButton.setBounds(157, 107, 138, 23);
-		frame.getContentPane().add(addEmployeeButton);
+		getFrame().getContentPane().add(addEmployeeButton);
 		
 		JButton removeEmployeeButton = new JButton("Remove Employee");
 		removeEmployeeButton.setBounds(157, 134, 138, 23);
-		frame.getContentPane().add(removeEmployeeButton);
+		getFrame().getContentPane().add(removeEmployeeButton);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 }

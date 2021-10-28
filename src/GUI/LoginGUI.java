@@ -1,79 +1,176 @@
 package GUI;
 
+import javax.swing.*;
+import Functions.LoginFunction;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginGUI {
 
 	private JFrame frame;
 	private JTextField textField;
-	private JTextField textField_1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginGUI window = new LoginGUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public LoginGUI() {
 		initialize();
 	}
 
 	/**
+	 * Create the application.
+     @ -41,39 +31,66 @@ public class loginGUI {
 	 * Initialize the contents of the frame.
 	 */
+	
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 349, 297);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		setFrame(new JFrame());
+		getFrame().setBounds(100, 100, 353, 442);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Ticket Tracker Login");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(55, 0, 213, 26);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel ticketLabel = new JLabel("Ticket Tracker Login");
+		ticketLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		ticketLabel.setBounds(55, 0, 213, 26);
+		frame.getContentPane().add(ticketLabel);
+		getFrame().getContentPane().add(ticketLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Employee ID:");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(86, 34, 150, 26);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel IDLabel = new JLabel("Employee ID:");
+		IDLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		IDLabel.setBounds(86, 34, 150, 26);
+		frame.getContentPane().add(IDLabel);
+		getFrame().getContentPane().add(IDLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(68, 61, 186, 32);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		JTextField IDField = new JTextField();
+		IDField.setBounds(68, 61, 186, 32);
+		getFrame().getContentPane().add(IDField);
+		IDField.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Password:");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(101, 107, 121, 26);
-		frame.getContentPane().add(lblNewLabel_2);
+		JLabel passLabel = new JLabel("Password:");
+		passLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		passLabel.setBounds(101, 107, 121, 26);
+		frame.getContentPane().add(passLabel);
+		getFrame().getContentPane().add(passLabel);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(68, 136, 186, 32);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		JTextField passField = new JTextField();
+		passField.setBounds(68, 136, 186, 32);
+		getFrame().getContentPane().add(passField);
+		passField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Login");
-		btnNewButton.setBounds(91, 180, 141, 35);
-		frame.getContentPane().add(btnNewButton);
+		JLabel loginLabel = new JLabel("");
+		loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		loginLabel.setBounds(86, 339, 150, 26);
+		frame.getContentPane().add(loginLabel);
+		
+		JRadioButton cookButton = new JRadioButton("Cook");
+		cookButton.setBounds(63, 232, 201, 35);
+		frame.getContentPane().add(cookButton);
+		
+		JRadioButton waiterButton = new JRadioButton("Waiter");
+		waiterButton.setBounds(63, 266, 201, 35);
+		frame.getContentPane().add(waiterButton);
+		
+		JRadioButton managerButton = new JRadioButton("Manager");
+		managerButton.setBounds(63, 301, 201, 35);
+		frame.getContentPane().add(managerButton);
+		
+		JButton loginButton = new JButton("Login");
+		loginButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String ID = IDField.getText();
+				String pass = passField.getText();
+					if(cookButton.isSelected()) {
+						try {
+							//open cook window
+							if(LoginFunction.login(ID, pass, "Cook") == true) {
+								EventQueue.invokeLater(new Runnable() {
+									public void run() {
+										try {
+											SettingsGUI window = new SettingsGUI();
+											window.getFrame().setVisible(true);
+										} catch (Exception e) {
+											e.printStackTrace();
+										}
+									}
+								});
+								frame.dispose();
+							} else {
+								loginLabel.setText("Incorrect Login");
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else if(waiterButton.isSelected()) {
+						//open Waiter window
+						try {
+							if(LoginFunction.login(ID, pass, "Waiter") == true) {
+								EventQueue.invokeLater(new Runnable() {
+									public void run() {
+										try {
+											SettingsGUI window = new SettingsGUI();
+											window.getFrame().setVisible(true);
+										} catch (Exception e) {
+											e.printStackTrace();
+										}
+									}
+								});
+								
+							} else {
+								loginLabel.setText("Incorrect Login");
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else {
+						//open Manager window
+						try {
+							if(LoginFunction.login(ID, pass, "Manager") == true) {
+								EventQueue.invokeLater(new Runnable() {
+									public void run() {
+										try {
+											SettingsGUI window = new SettingsGUI();
+											window.getFrame().setVisible(true);
+										} catch (Exception e) {
+											e.printStackTrace();
+										}
+									}
+								});
+								frame.dispose();
+							} else {
+								loginLabel.setText("Incorrect Login");
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+
+		});
+		loginButton.setBounds(91, 180, 141, 35);
+		frame.getContentPane().add(loginButton);
+		getFrame().getContentPane().add(loginButton);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(cookButton);
+		group.add(waiterButton);
+		group.add(managerButton);
+
 	}
 
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
 }
