@@ -47,7 +47,7 @@ public class SettingsGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 469, 276);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Settings");
@@ -80,13 +80,21 @@ public class SettingsGUI {
 		addEmployeeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				RegisterGUI register = new RegisterGUI();
+				register.getFrame().setVisible(true);
 			}
 		});
 		addEmployeeButton.setBounds(157, 107, 138, 23);
 		frame.getContentPane().add(addEmployeeButton);
 		
 		JButton removeEmployeeButton = new JButton("Remove Employee");
+		removeEmployeeButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				RemoveEmployeeGUI remove = new RemoveEmployeeGUI();
+				remove.getFrame().setVisible(true);
+			}
+		});
 		removeEmployeeButton.setBounds(157, 134, 138, 23);
 		frame.getContentPane().add(removeEmployeeButton);
 	}

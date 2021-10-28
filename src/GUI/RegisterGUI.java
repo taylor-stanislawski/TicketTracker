@@ -29,7 +29,7 @@ public class RegisterGUI {
 			public void run() {
 				try {
 					RegisterGUI window = new RegisterGUI();
-					window.frame.setVisible(true);
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,28 +48,28 @@ public class RegisterGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 442, 346);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setFrame(new JFrame());
+		getFrame().setBounds(100, 100, 442, 346);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getFrame().getContentPane().setLayout(null);
 		
 		JLabel registerLabel = new JLabel("Register");
 		registerLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		registerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		registerLabel.setBounds(145, 11, 135, 36);
-		frame.getContentPane().add(registerLabel);
+		getFrame().getContentPane().add(registerLabel);
 		
 		JRadioButton cookButton = new JRadioButton("Cook");
 		cookButton.setBounds(158, 172, 109, 23);
-		frame.getContentPane().add(cookButton);
+		getFrame().getContentPane().add(cookButton);
 		
 		JRadioButton waiterButton = new JRadioButton("Waiter");
 		waiterButton.setBounds(158, 198, 109, 23);
-		frame.getContentPane().add(waiterButton);
+		getFrame().getContentPane().add(waiterButton);
 		
 		JRadioButton managerButton = new JRadioButton("Manager");
 		managerButton.setBounds(158, 224, 109, 23);
-		frame.getContentPane().add(managerButton);
+		getFrame().getContentPane().add(managerButton);
 		
 		ButtonGroup radio = new ButtonGroup();
 		radio.add(cookButton);
@@ -78,26 +78,26 @@ public class RegisterGUI {
 		
 		JLabel idLabel = new JLabel("ID:");
 		idLabel.setBounds(140, 84, 146, 14);
-		frame.getContentPane().add(idLabel);
+		getFrame().getContentPane().add(idLabel);
 		
 		idTextfield = new JTextField();
 		idTextfield.setColumns(10);
 		idTextfield.setBounds(140, 98, 146, 20);
-		frame.getContentPane().add(idTextfield);
+		getFrame().getContentPane().add(idTextfield);
 		
 		pwdTextfield = new JTextField();
 		pwdTextfield.setColumns(10);
 		pwdTextfield.setBounds(140, 141, 146, 20);
-		frame.getContentPane().add(pwdTextfield);
+		getFrame().getContentPane().add(pwdTextfield);
 		
 		JLabel pwdLabel = new JLabel("Password:");
 		pwdLabel.setBounds(140, 127, 146, 14);
-		frame.getContentPane().add(pwdLabel);
+		getFrame().getContentPane().add(pwdLabel);
 		
 		JLabel messageLabel = new JLabel("");
 		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		messageLabel.setBounds(10, 50, 406, 23);
-		frame.getContentPane().add(messageLabel);
+		getFrame().getContentPane().add(messageLabel);
 		
 		JButton registerButton = new JButton("Register");
 		registerButton.addMouseListener(new MouseAdapter() {
@@ -132,8 +132,16 @@ public class RegisterGUI {
 			}
 		});
 		registerButton.setBounds(152, 254, 122, 23);
-		frame.getContentPane().add(registerButton);
+		getFrame().getContentPane().add(registerButton);
 		
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 	
 }

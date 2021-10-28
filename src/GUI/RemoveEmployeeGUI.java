@@ -29,7 +29,7 @@ public class RemoveEmployeeGUI {
 			public void run() {
 				try {
 					RemoveEmployeeGUI window = new RemoveEmployeeGUI();
-					window.frame.setVisible(true);
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,43 +48,43 @@ public class RemoveEmployeeGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 350);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setFrame(new JFrame());
+		getFrame().setBounds(100, 100, 500, 350);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getFrame().getContentPane().setLayout(null);
 		
 		JLabel removeEmployeeLabel = new JLabel("Remove Employee");
 		removeEmployeeLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		removeEmployeeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		removeEmployeeLabel.setBounds(87, 11, 310, 47);
-		frame.getContentPane().add(removeEmployeeLabel);
+		getFrame().getContentPane().add(removeEmployeeLabel);
 		
 		JLabel messageLabel = new JLabel("message");
 		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		messageLabel.setBounds(10, 69, 464, 14);
-		frame.getContentPane().add(messageLabel);
+		getFrame().getContentPane().add(messageLabel);
 		
 		idTextfield = new JTextField();
 		idTextfield.setBounds(159, 121, 165, 20);
-		frame.getContentPane().add(idTextfield);
+		getFrame().getContentPane().add(idTextfield);
 		idTextfield.setColumns(10);
 		
 		JLabel idLabel = new JLabel("ID:");
 		idLabel.setBounds(159, 106, 165, 14);
-		frame.getContentPane().add(idLabel);
+		getFrame().getContentPane().add(idLabel);
 		
 		JRadioButton cookButton = new JRadioButton("Cook");
 		cookButton.setSelected(true);
 		cookButton.setBounds(187, 166, 109, 23);
-		frame.getContentPane().add(cookButton);
+		getFrame().getContentPane().add(cookButton);
 		
 		JRadioButton waiterButton = new JRadioButton("Waiter");
 		waiterButton.setBounds(187, 192, 109, 23);
-		frame.getContentPane().add(waiterButton);
+		getFrame().getContentPane().add(waiterButton);
 		
 		JRadioButton managerButton = new JRadioButton("Manager");
 		managerButton.setBounds(187, 218, 109, 23);
-		frame.getContentPane().add(managerButton);
+		getFrame().getContentPane().add(managerButton);
 		
 		JButton removeEmployeeButton = new JButton("Remove Employee");
 		removeEmployeeButton.addMouseListener(new MouseAdapter() {
@@ -122,7 +122,15 @@ public class RemoveEmployeeGUI {
 			}
 		});
 		removeEmployeeButton.setBounds(159, 266, 165, 23);
-		frame.getContentPane().add(removeEmployeeButton);
+		getFrame().getContentPane().add(removeEmployeeButton);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 
 }

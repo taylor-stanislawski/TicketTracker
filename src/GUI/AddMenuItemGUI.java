@@ -42,7 +42,7 @@ public class AddMenuItemGUI {
 		
 		//System.out.println
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -102,7 +102,7 @@ public class AddMenuItemGUI {
 				if(isInteger(name)==true) {//name cannot be an integer
 					JLayeredPane testcontentPane;//build new frame for error
 					testFrame.setVisible(true);
-					testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					testFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					testFrame.setBounds(400, 100, 638, 200);
 					testcontentPane = new JLayeredPane();
 					testcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
