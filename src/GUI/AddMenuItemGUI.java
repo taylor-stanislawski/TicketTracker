@@ -132,7 +132,33 @@ public class AddMenuItemGUI {
 				        ne.AddSingleItemtoText(idInt, name, fPrice);//add the item to our text file which also adds to fooditem list
 				        
 						frame.dispose();
-						AddMenuItemGUI(ne.FoodItems);//do again with the fooditems list		
+						JPanel invalidcontentPane;
+						
+						JFrame invalidFrame = new JFrame();
+						invalidFrame.setVisible(true);
+						
+						invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						invalidFrame.setBounds(100, 100, 298, 114);
+						invalidcontentPane = new JPanel();
+						invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+						invalidFrame.setContentPane(invalidcontentPane);
+						invalidcontentPane.setLayout(null);
+						
+						JLabel lblNewLabel = new JLabel("Your item has been added.");
+						lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+						lblNewLabel.setBounds(20, 11, 262, 14);
+						invalidcontentPane.add(lblNewLabel);
+						
+						JButton btnNewButton = new JButton("Okay");
+						btnNewButton.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								invalidFrame.dispose();
+								AddMenuItemGUI(ne.FoodItems);//do again with the fooditems list		
+							}
+						});
+						btnNewButton.setBounds(96, 47, 89, 23);
+						invalidcontentPane.add(btnNewButton);
 				}
 			} else {//if this id already exists
 				textField.setText("");
@@ -202,6 +228,8 @@ public class AddMenuItemGUI {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				AddMenuItemFunction re = new AddMenuItemFunction();
+				re.FoodItems.clear();
 				frame.dispose();
 			}
 		});
@@ -357,14 +385,69 @@ public class AddMenuItemGUI {
 								removeFrame.dispose();
 								frame.dispose();
 								AddMenuItemGUI re1 = new AddMenuItemGUI();
-								re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
+								
+								JPanel invalidcontentPane;
+								
+								JFrame invalidFrame = new JFrame();
+								invalidFrame.setVisible(true);
+								
+								invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+								invalidFrame.setBounds(100, 100, 298, 114);
+								invalidcontentPane = new JPanel();
+								invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+								invalidFrame.setContentPane(invalidcontentPane);
+								invalidcontentPane.setLayout(null);
+								
+								JLabel lblNewLabel = new JLabel("Your item has been updated.");
+								lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+								lblNewLabel.setBounds(20, 11, 262, 14);
+								invalidcontentPane.add(lblNewLabel);
+								
+								JButton btnNewButton = new JButton("Okay");
+								btnNewButton.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										invalidFrame.dispose();
+										re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
+									}
+								});
+								btnNewButton.setBounds(96, 47, 89, 23);
+								invalidcontentPane.add(btnNewButton);
+								
 								} else {
 									if (editId==theId) {
 										re.EditItem(theId, idString, newName, newPrice);//run the changes to the function
 										removeFrame.dispose();
 										frame.dispose();
 										AddMenuItemGUI re1 = new AddMenuItemGUI();
-										re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
+										JPanel invalidcontentPane;
+										
+										JFrame invalidFrame = new JFrame();
+										invalidFrame.setVisible(true);
+										
+										invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+										invalidFrame.setBounds(100, 100, 298, 114);
+										invalidcontentPane = new JPanel();
+										invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+										invalidFrame.setContentPane(invalidcontentPane);
+										invalidcontentPane.setLayout(null);
+										
+										JLabel lblNewLabel = new JLabel("Your item has been updated.");
+										lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+										lblNewLabel.setBounds(20, 11, 262, 14);
+										invalidcontentPane.add(lblNewLabel);
+										
+										JButton btnNewButton = new JButton("Okay");
+										btnNewButton.addMouseListener(new MouseAdapter() {
+											@Override
+											public void mouseClicked(MouseEvent e) {
+												invalidFrame.dispose();
+												re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
+											}
+										});
+										btnNewButton.setBounds(96, 47, 89, 23);
+										invalidcontentPane.add(btnNewButton);
+										
 									}
 									else if (emptyIns==false) {
 									textField.setText("");
@@ -373,7 +456,7 @@ public class AddMenuItemGUI {
 									JFrame invalidFrame = new JFrame();
 									invalidFrame.setVisible(true);
 									
-									invalidFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+									invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 									invalidFrame.setBounds(100, 100, 298, 114);
 									invalidcontentPane = new JPanel();
 									invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -550,7 +633,34 @@ public class AddMenuItemGUI {
 						removeframe.dispose();
 						frame.dispose();
 						AddMenuItemGUI re1 = new AddMenuItemGUI();
-						re1.AddMenuItemGUI(re.FoodItems);
+						
+						JPanel invalidcontentPane;
+						
+						JFrame invalidFrame = new JFrame();
+						invalidFrame.setVisible(true);
+						
+						invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						invalidFrame.setBounds(100, 100, 298, 114);
+						invalidcontentPane = new JPanel();
+						invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+						invalidFrame.setContentPane(invalidcontentPane);
+						invalidcontentPane.setLayout(null);
+						
+						JLabel lblNewLabel = new JLabel("Your item has been removed.");
+						lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+						lblNewLabel.setBounds(20, 11, 262, 14);
+						invalidcontentPane.add(lblNewLabel);
+						
+						JButton btnNewButton = new JButton("Okay");
+						btnNewButton.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								invalidFrame.dispose();
+								AddMenuItemGUI(re.FoodItems);//do again with the fooditems list		
+							}
+						});
+						btnNewButton.setBounds(96, 47, 89, 23);
+						invalidcontentPane.add(btnNewButton);
 					}}}
 				});
 				btnNewButton.setBounds(100, 81, 89, 23);

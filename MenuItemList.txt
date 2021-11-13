@@ -1,9 +1,10 @@
 1 Milk 3.0
 2 Water 1.0
 3 Beer 2.0
-4 Lemonade 2.0
+4 Lemonade 3.0
 5 Carbonated-Milk 3.0
 6 Trout-Fish 8.0
+7 Chocolate-Milk 3.0
 8 ChickenNoodleSoup 5.0
 9 Steak 10.0
 11 Fries 4.0

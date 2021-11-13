@@ -147,6 +147,7 @@ public class AddMenuItemFunction {
     System.out.println(id);
     String name = null;
     String price = null;
+    FoodItems.clear();
     while (id != null) {
     	if (id.contains("/")) {//categories in the text are preceded by a /
     		listOfCategories.add(id);
