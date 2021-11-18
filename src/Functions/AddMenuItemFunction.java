@@ -1,9 +1,12 @@
 package Functions;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,28 +18,35 @@ public class AddMenuItemFunction {
 	
 	ArrayList<String> listOfFoodItems = new ArrayList<>();
     ArrayList<String> listOfCategories = new ArrayList<>();//categories if we decide to do that
+    public static Statement stmt = null;
+	public static ResultSet rs = null;
     
    public static ArrayList<FoodItem> FoodItems = new ArrayList<>();//the fooditems list
 	
-	public void AddSingleItem(int id, String name, float newPrice){
+	public AddMenuItemFunction(Connection conn) {
+}
+
+	public void AddSingleItem(int id, String name, float newPrice, Connection conn){
 		FoodItem item = new FoodItem(id, name, newPrice);//make the food item
 	    FoodItems.add(item);//add it to the list (this does not add to the file)
 		FoodItems = sortFoodList(FoodItems);
 	}
 	
-	public boolean RemoveItem(int id) {
+	public boolean RemoveItem(int id, Connection conn) {
 		boolean removed = false;
 		for (int i=0; i<FoodItems.size(); i++) {
 			FoodItem item = FoodItems.get(i);
 			if(item.getId()==id) {
-				FoodItems.remove(i);
-				removed = true;
 				try {
-					ItemListToText(FoodItems);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	                stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+	                            ResultSet.CONCUR_READ_ONLY);
+		            stmt.executeUpdate("delete from ticketTracker.menu\r\n " + 
+		            					   "where itemNum = '" + id + "'");
+		        } catch (SQLException e) {
+		            //print SQL errors
+		            e.printStackTrace();
+		        }
+				removed = true;
 			}
 		}
 		
@@ -44,18 +54,12 @@ public class AddMenuItemFunction {
 		return removed;
 	}
 	
-	public FoodItem GetItem(int id) {
+	public FoodItem GetItem(int id, Connection conn) {
 		FoodItem thisItem = null;
 		for (int i=0; i<FoodItems.size(); i++) {
 			FoodItem item = FoodItems.get(i);
 			if(item.getId()==id) {
 				thisItem=FoodItems.get(i);
-				try {
-					ItemListToText(FoodItems);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 		}
 		
@@ -63,7 +67,7 @@ public class AddMenuItemFunction {
 		return thisItem;
 	}
 	
-	public boolean idExists(int id) {//tests to see if the ID exists in the database. returns true if so
+	public boolean idExists(int id, Connection conn) {//tests to see if the ID exists in the database. returns true if so
 		boolean doesExist = false;
 		for (int i=0; i<FoodItems.size(); i++) {
 			FoodItem item = FoodItems.get(i);
@@ -74,106 +78,79 @@ public class AddMenuItemFunction {
 		return doesExist;
 	}
 	
-	public void EditItem(int id, String newid, String newName, String itemPrice) {//edditing item in the database
+	public void EditItem(int id, String newid, String newName, String itemPrice, Connection conn) {//editing item in the database
 		for (int i=0; i<FoodItems.size(); i++) {
 			FoodItem item = FoodItems.get(i);
 			if(item.getId()==id) {
-				if (newName != null && !newName.isEmpty()) {//if statements for each seperatly allow changes to individual id, name or price
-					FoodItems.get(i).setName(newName);
-				}
-				if(newid != null && !newid.isEmpty()) {
-					int itemId = Integer.parseInt(newid);
-					FoodItems.get(i).setId(itemId);
-				}
-				if (itemPrice != null && !itemPrice.isEmpty()) {
-					float newPrice = Float.parseFloat(itemPrice);
-					FoodItems.get(i).setPrice(newPrice);
-				}
-				
 				try {
-					ItemListToText(FoodItems);//export to text with our updated list
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		FoodItems = sortFoodList(FoodItems);
-	}
-	
-	public void ItemListToText(ArrayList<FoodItem> FoodItems) throws IOException {
-		FoodItems = sortFoodList(FoodItems);
-		FileWriter myWriter;	
-		myWriter = new FileWriter("MenuItemList.txt");
-		
-		for (int i=0; i<FoodItems.size(); i++) {
-			
-	        try {
-				myWriter.write(FoodItems.get(i).getId() + " " + FoodItems.get(i).getName() + " " + FoodItems.get(i).getPrice() + "\n");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		                        ResultSet.CONCUR_READ_ONLY);
+		            if (newName != null && !newName.isEmpty()) {//if statements for each seperately allow changes to individual id, name or price
+						FoodItems.get(i).setName(newName);
+						stmt.executeUpdate("UPDATE ticketTracker.menu " + 
+          					  "SET itemNum = " + newid + " " +
+          					  "where itemNum = " + id);
+					}
+					if(newid != null && !newid.isEmpty()) {
+						int itemId = Integer.parseInt(newid);
+						FoodItems.get(i).setId(itemId);
+						stmt.executeUpdate("UPDATE ticketTracker.menu " + 
+	          					  "SET item = '" + newName + "' " +
+	          					  "where itemNum = " + id);
+					}
+					if (itemPrice != null && !itemPrice.isEmpty()) {
+						float newPrice = Float.parseFloat(itemPrice);
+						FoodItems.get(i).setPrice(newPrice);
+						stmt.executeUpdate("UPDATE ticketTracker.menu " + 
+	          					  "SET price = " + newPrice + " " +
+	          					  "where itemNum = " + id);
+					}
 
+		        } catch (SQLException e) {
+		            //print SQL errors
+		            e.printStackTrace();
+		        }
+				
+				
+			}
 		}
-        myWriter.close();
+		FoodItems = sortFoodList(FoodItems);
 	}
 	
-	public void AddSingleItemtoText(int id, String name, float itemPrice){//add to the list and to the file
+	
+	public void AddSingleItemtoText(int id, String name, float itemPrice, Connection conn){//add to the list and to the file
 		FoodItem item = new FoodItem(id, name, itemPrice);
 	    FoodItems.add(item);
 	    
 		FoodItems = sortFoodList(FoodItems);
 	    
-	    try {//file writer for writing to the file
-	        FileWriter myWriter = new FileWriter("MenuItemList.txt", true);
-	        myWriter.write("\n" + id + " " + name + " " + itemPrice);
-	        myWriter.close();
-	        System.out.println("Successfully wrote to the file.");
-	      } catch (IOException e) {
-	        System.out.println("An error occurred.");
-	        e.printStackTrace();
-	      }
+		try {
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+            stmt.executeUpdate("insert into ticketTracker.menu\r\n " + 
+            				   "VALUES(" + id + ", '" + name + "', " + itemPrice + ");");
+        } catch (SQLException e) {
+            //print SQL errors
+            e.printStackTrace();
+        }
 	}
 	
-	public void AddItemsFromText(String fileName) throws IOException {//read text file and import fooditems
+	public void AddItemsFromText(String fileName, Connection conn) throws IOException {//read text file and import fooditems
 
-		Scanner sc = new Scanner(new File(fileName));
-
-    //ArrayList<String> listOfFoodItems = new ArrayList<>();
-   // ArrayList<String> listOfCategories = new ArrayList<>();
-
-    String id = sc.next();
-    System.out.println(id);
-    String name = null;
-    String price = null;
     FoodItems.clear();
-    while (id != null) {
-    	if (id.contains("/")) {//categories in the text are preceded by a /
-    		listOfCategories.add(id);
-    		  //System.out.println(id);
-    		 id = sc.next();
-    		 // System.out.println("next id " + id);
-    	} else {//if it isnt a category`
-    		//id = sc.next();
-    		name = sc.next();//get the name
-    		  //System.out.println(name);
-    		price = sc.next();//get the price
-    		 // System.out.println(price);
-    		float f=Float.parseFloat(price);//convert string to float and int
-    		int idInt = Integer.parseInt(id);
-
-    		
-    		AddSingleItem(idInt, name, f);//add the item to the list
-    		
-    		if (sc.hasNext()) {
-    		id = sc.next(); //test if we have more food items
-    		}
-    		else {
-    			id = null;//if not, this gets us out of the while loop
-    		}
-    }
-    	}
+    try {
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        rs = stmt.executeQuery("SELECT * FROM ticketTracker.menu order by itemNum");
+	    while(rs.next()) {
+	    	AddSingleItem(rs.getInt(1), rs.getString(2), rs.getInt(3), conn);
+	    }
+	} catch (SQLException e) {
+	    //print SQL errors
+	    e.printStackTrace();
+	}
+    
+    
     //the rest us for printing to the console
     for(int i=0; i<listOfFoodItems.size(); i++) {
     //System.out.println(listOfFoodItems.get(i));
@@ -189,8 +166,7 @@ public class AddMenuItemFunction {
     for(int i=0; i<FoodItems.size(); i++) {
     	System.out.println(FoodItems.get(i).toString());
     }
-    
-    sc.close();
+
 }
 	public ArrayList<FoodItem> sortFoodList(ArrayList<FoodItem> FoodList) {
 		Collections.sort(FoodList, new Comparator<FoodItem>(){
