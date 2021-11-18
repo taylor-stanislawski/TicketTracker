@@ -33,11 +33,14 @@ public class AddMenuItemGUI {
 		
 		JFrame testFrame = new JFrame();
 		
+		
 		ArrayList<String> itemTexts = new ArrayList();
 		
 		for (int i=0; i<itemList.size(); i++) {
 			itemTexts.add(itemList.get(i).toStringGUI());//converting the list of fooditems to a String representation
 		}
+		
+		int thisId;
 		
 		
 		//System.out.println
@@ -81,10 +84,13 @@ public class AddMenuItemGUI {
 		scrollPane.setBounds(10, 97, 414, 153);
 		contentPane.add(scrollPane);
 		
-		JButton btnNewButton = new JButton("Add");//add button with action listener for values in text fields
-		btnNewButton.setBounds(15, 64, 89, 23);
-		contentPane.add(btnNewButton);
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnRemove = new JButton("Remove");//removing an item
+		
+		
+		JButton btnAddButton = new JButton("Add");//add button with action listener for values in text fields
+		btnAddButton.setBounds(15, 64, 89, 23);
+		contentPane.add(btnAddButton);
+		btnAddButton.addMouseListener(new MouseAdapter() {
 			@Override
 			
 			public void mouseClicked(MouseEvent e) {
@@ -240,6 +246,8 @@ public class AddMenuItemGUI {
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int thisId = displayList.getSelectedIndex();
+				System.out.println(thisId);
 				JPanel removecontentPane;
 				JTextField textField;
 				JFrame removeframe = new JFrame();
@@ -251,7 +259,7 @@ public class AddMenuItemGUI {
 				removeframe.setContentPane(removecontentPane);
 				removecontentPane.setLayout(null);
 				
-				JLabel lblNewLabel = new JLabel("Enter the ID of the item you would like to edit.");
+				/*JLabel lblNewLabel = new JLabel("Enter the ID of the item you would like to edit.");
 				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblNewLabel.setBounds(10, 11, 283, 28);
 				removecontentPane.add(lblNewLabel);
@@ -263,57 +271,19 @@ public class AddMenuItemGUI {
 				
 				JLabel lblNewLabel_1 = new JLabel("ID:");
 				lblNewLabel_1.setBounds(74, 50, 15, 14);
-				removecontentPane.add(lblNewLabel_1);
+				removecontentPane.add(lblNewLabel_1);*/
 				
-				JButton btnNewButton = new JButton("Edit");
-				btnNewButton.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
 						Boolean isError = false;
 						AddMenuItemFunction re = new AddMenuItemFunction();
-						String text = textField.getText();
-						if (text == null || text.isEmpty()) {//if text is empty, assign 9999 which will never be item id. this will then not allow you to edit blank id
-							text = "9999";
-						}
-						int thisId = 0;
-						try {
-						thisId = Integer.parseInt(text);}
-						catch (NumberFormatException ex) {
-							isError=true;
-							textField.setText("");
-							JPanel invalidcontentPane;
-							
-							JFrame invalidFrame = new JFrame();
-							invalidFrame.setVisible(true);
-							
-							invalidFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-							invalidFrame.setBounds(100, 100, 298, 114);
-							invalidcontentPane = new JPanel();
-							invalidcontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-							invalidFrame.setContentPane(invalidcontentPane);
-							invalidcontentPane.setLayout(null);
-							
-							JLabel lblNewLabel = new JLabel("You entered an invalid ID");
-							lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-							lblNewLabel.setBounds(20, 11, 262, 14);
-							invalidcontentPane.add(lblNewLabel);
-							
-							JButton btnNewButton = new JButton("Okay");
-							btnNewButton.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									invalidFrame.dispose();
-								}
-							});
-							btnNewButton.setBounds(96, 47, 89, 23);
-							invalidcontentPane.add(btnNewButton);
-						}
+						//String text = textField.getText();
+						//if (text == null || text.isEmpty()) {//if text is empty, assign 9999 which will never be item id. this will then not allow you to edit blank id
+						//	text = "9999";
+						//}
+					
 						if (isError == false) {
 							
 						if(re.idExists(thisId)==true){//tests to see if the id exists in our database
-						String id = textField.getText();
-						int theId = Integer.parseInt(id);
-						JPanel removecontentPane;
+						int theId = thisId+1;
 						JTextField edittextField;
 						JTextField edittextField_1;
 						JTextField edittextField_2;
@@ -322,7 +292,7 @@ public class AddMenuItemGUI {
 						removeFrame.setVisible(true);
 						
 						removeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						removeFrame.setBounds(100, 100, 450, 150);
+						removeFrame.setBounds(700, 100, 450, 150);
 						removecontentPane = new JPanel();
 						contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 						removeFrame.setContentPane(removecontentPane);
@@ -362,8 +332,8 @@ public class AddMenuItemGUI {
 						removecontentPane.add(edittextField_2);
 						edittextField_2.setColumns(10);
 						
-						JButton btnNewButton = new JButton("Save");
-						btnNewButton.addMouseListener(new MouseAdapter() {
+						JButton btnSaveButton = new JButton("Save");
+						btnSaveButton.addMouseListener(new MouseAdapter() {
 							@Override
 							public void mouseClicked(MouseEvent e) {
 								boolean emptyIns = false;
@@ -403,16 +373,16 @@ public class AddMenuItemGUI {
 								lblNewLabel.setBounds(20, 11, 262, 14);
 								invalidcontentPane.add(lblNewLabel);
 								
-								JButton btnNewButton = new JButton("Okay");
-								btnNewButton.addMouseListener(new MouseAdapter() {
+								JButton btnOkayButton = new JButton("Okay");
+								btnOkayButton.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										invalidFrame.dispose();
 										re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
 									}
 								});
-								btnNewButton.setBounds(96, 47, 89, 23);
-								invalidcontentPane.add(btnNewButton);
+								btnOkayButton.setBounds(96, 47, 89, 23);
+								invalidcontentPane.add(btnOkayButton);
 								
 								} else {
 									if (editId==theId) {
@@ -450,7 +420,6 @@ public class AddMenuItemGUI {
 										
 									}
 									else if (emptyIns==false) {
-									textField.setText("");
 									JPanel invalidcontentPane;
 									
 									JFrame invalidFrame = new JFrame();
@@ -480,8 +449,8 @@ public class AddMenuItemGUI {
 								}}
 							}
 						});
-						btnNewButton.setBounds(150, 80, 89, 23);
-						removecontentPane.add(btnNewButton);
+						btnSaveButton.setBounds(150, 80, 89, 23);
+						removecontentPane.add(btnSaveButton);
 					}else{//if id didnt exist
 						JPanel invalidcontentPane;
 						JLabel txtYouEnteredAnd;
@@ -515,55 +484,24 @@ public class AddMenuItemGUI {
 						}}
 						if (isError==false) {
 						removeframe.dispose();}
-					}
-				});
-				btnNewButton.setBounds(100, 81, 89, 23);
-				removecontentPane.add(btnNewButton);
+				//btnSaveButton.setBounds(100, 81, 89, 23);
+				//removecontentPane.add(btnNewButton);
 			}
 				
 		});
 		
-		JButton btnRemove = new JButton("Remove");//removing an item
+		
 		btnRemove.setBounds(229, 64, 89, 23);
 		contentPane.add(btnRemove);
 		btnRemove.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel removecontentPane;
-				JTextField textField;
-				JFrame removeframe = new JFrame();
-				removeframe.setVisible(true);
-				removeframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				removeframe.setBounds(100, 100, 319, 152);
-				removecontentPane = new JPanel();
-				removecontentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-				removeframe.setContentPane(removecontentPane);
-				removecontentPane.setLayout(null);
-				
-				JLabel lblNewLabel = new JLabel("Enter the ID of the item you would like to remove.");
-				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				lblNewLabel.setBounds(10, 11, 283, 28);
-				removecontentPane.add(lblNewLabel);
-				
-				textField = new JTextField();
-				textField.setBounds(100, 50, 86, 20);
-				removecontentPane.add(textField);
-				textField.setColumns(10);
-				
-				JLabel lblNewLabel_1 = new JLabel("ID:");
-				lblNewLabel_1.setBounds(74, 50, 15, 14);
-				removecontentPane.add(lblNewLabel_1);
-				
-				JButton btnNewButton = new JButton("Remove");
-				btnNewButton.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						String textFieldString = textField.getText();
-						System.out.println(textField);
+			
 						int id=9789;
 						int saveId=9789;
 						try {
-						id = Integer.parseInt(textFieldString);}
+							
+						}
 						catch (NumberFormatException ex){
 							JPanel invalidcontentPane;
 							JLabel txtYouEnteredAnd;
@@ -595,9 +533,13 @@ public class AddMenuItemGUI {
 							btnNewButton.setBounds(96, 47, 89, 23);
 							invalidcontentPane.add(btnNewButton);
 						}
+						
+						id = displayList.getSelectedIndex();
+						
 						if(id==saveId) {}else {//our save id is our error code. if this error code is in place, dont run the remove
 						AddMenuItemFunction re = new AddMenuItemFunction();
-						boolean removed = re.RemoveItem(id);//remove the id
+						System.out.println(id+4);
+						boolean removed = re.RemoveItem(id+4);//remove the id
 						if (removed==false) {
 							JPanel invalidcontentPane;
 							JLabel txtYouEnteredAnd;
@@ -624,13 +566,11 @@ public class AddMenuItemGUI {
 								@Override
 								public void mouseClicked(MouseEvent e) {
 									invalidFrame.dispose();
-									removeframe.dispose();
 								}
 							});
 							btnNewButton.setBounds(96, 47, 89, 23);
 							invalidcontentPane.add(btnNewButton);
 						} else {
-						removeframe.dispose();
 						frame.dispose();
 						AddMenuItemGUI re1 = new AddMenuItemGUI();
 						
@@ -646,10 +586,10 @@ public class AddMenuItemGUI {
 						invalidFrame.setContentPane(invalidcontentPane);
 						invalidcontentPane.setLayout(null);
 						
-						JLabel lblNewLabel = new JLabel("Your item has been removed.");
-						lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-						lblNewLabel.setBounds(20, 11, 262, 14);
-						invalidcontentPane.add(lblNewLabel);
+						JLabel lblNewLabel1 = new JLabel("Your item has been removed.");
+						lblNewLabel1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+						lblNewLabel1.setBounds(20, 11, 262, 14);
+						invalidcontentPane.add(lblNewLabel1);
 						
 						JButton btnNewButton = new JButton("Okay");
 						btnNewButton.addMouseListener(new MouseAdapter() {
@@ -661,15 +601,14 @@ public class AddMenuItemGUI {
 						});
 						btnNewButton.setBounds(96, 47, 89, 23);
 						invalidcontentPane.add(btnNewButton);
-					}}}
-				});
-				btnNewButton.setBounds(100, 81, 89, 23);
-				removecontentPane.add(btnNewButton);
+					}}
+				//btnNewButton.setBounds(100, 81, 89, 23);
+				//removecontentPane.add(btnNewButton);
 			}
 		});
 		
 
-		frame.getRootPane().setDefaultButton(btnNewButton);
+		//frame.getRootPane().setDefaultButton(btnNewButton);
 		
 }
 	public static boolean isInteger(String str) {//tests if a string is an integer representation
