@@ -248,6 +248,7 @@ public class AddMenuItemGUI {
 			public void mouseClicked(MouseEvent e) {
 				int thisId = displayList.getSelectedIndex();
 				System.out.println(thisId);
+				FoodItem thisItem = itemList.get(thisId);
 				JPanel removecontentPane;
 				JTextField textField;
 				JFrame removeframe = new JFrame();
@@ -282,11 +283,13 @@ public class AddMenuItemGUI {
 					
 						if (isError == false) {
 							
-						if(re.idExists(thisId)==true){//tests to see if the id exists in our database
-						int theId = thisId+1;
+						if(re.idExists(thisItem.getId())==true){//tests to see if the id exists in our database
+						int theId = thisItem.getId();
+						System.out.print("Selected id:" + theId);
 						JTextField edittextField;
 						JTextField edittextField_1;
 						JTextField edittextField_2;
+						
 						
 						JFrame removeFrame = new JFrame();
 						removeFrame.setVisible(true);
@@ -298,7 +301,7 @@ public class AddMenuItemGUI {
 						removeFrame.setContentPane(removecontentPane);
 						removecontentPane.setLayout(null);
 						
-						FoodItem thisItem = re.GetItem(theId);
+						//FoodItem thisItem = re.GetItem(theId);
 						
 						JLabel lblNewLabel = new JLabel("Enter the new info for " + thisItem.getName() + " (ID= " + theId + ", Price= " + thisItem.getPrice() + ")");
 						lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -538,8 +541,9 @@ public class AddMenuItemGUI {
 						
 						if(id==saveId) {}else {//our save id is our error code. if this error code is in place, dont run the remove
 						AddMenuItemFunction re = new AddMenuItemFunction();
-						System.out.println(id+4);
-						boolean removed = re.RemoveItem(id+4);//remove the id
+						FoodItem thisItem = itemList.get(id);
+						System.out.println(id);
+						boolean removed = re.RemoveItem(thisItem.getId());//remove the id
 						if (removed==false) {
 							JPanel invalidcontentPane;
 							JLabel txtYouEnteredAnd;
