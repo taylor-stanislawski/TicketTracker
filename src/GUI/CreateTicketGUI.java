@@ -50,6 +50,6 @@ public class CreateTicketGUI {
 		createTicketLabel.setBounds(10, 11, 433, 34);
 		frame.getContentPane().add(createTicketLabel);
 		
-		JList<String> addedItems = new JList<>()
+		JList<String> addedItems = new JList<>();
 	}
 }
