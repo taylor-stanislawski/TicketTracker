@@ -13,38 +13,26 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.sql.Connection;
 
 public class SettingsGUI {
 
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SettingsGUI window = new SettingsGUI();
-					window.getFrame().setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
+	 * @param conn 
 	 */
-	public SettingsGUI() {
-		initialize();
+	public SettingsGUI(Connection conn) {
+		initialize(conn);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Connection conn) {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 469, 276);
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -60,17 +48,17 @@ public class SettingsGUI {
 		editMenuButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AddMenuItemFunction re = new AddMenuItemFunction();
+				AddMenuItemFunction re = new AddMenuItemFunction(conn);
 				String fileName = "MenuItemList.txt";
 				                    try {
-										re.AddItemsFromText(fileName);
+										re.AddItemsFromText(fileName, conn);
 									} catch (IOException e1) {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 
 				AddMenuItemGUI re1 = new AddMenuItemGUI();
-				                    re1.AddMenuItemGUI(re.FoodItems);//run gui with fooditems list
+				                    re1.AddMenuItemGUI(re.FoodItems, conn);//run gui with fooditems list
 			}
 		});
 		editMenuButton.setBounds(157, 81, 138, 23);
@@ -104,7 +92,7 @@ public class SettingsGUI {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							LoginGUI window = new LoginGUI();
+							LoginGUI window = new LoginGUI(conn);
 							window.getFrame().setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();

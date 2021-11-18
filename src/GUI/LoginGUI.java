@@ -5,13 +5,14 @@ import Functions.LoginFunction;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
 
 public class LoginGUI {
 
 	private JFrame frame;
 
-	public LoginGUI() {
-		initialize();
+	public LoginGUI(Connection conn) {
+		initialize(conn);
 	}
 
 	/**
@@ -21,7 +22,7 @@ public class LoginGUI {
 	 */
 	
 	
-	private void initialize() {
+	private void initialize(Connection conn) {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 353, 442);
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -85,7 +86,7 @@ public class LoginGUI {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
-											SettingsGUI window = new SettingsGUI();
+											SettingsGUI window = new SettingsGUI(conn);
 											window.getFrame().setVisible(true);
 										} catch (Exception e) {
 											e.printStackTrace();
@@ -107,7 +108,7 @@ public class LoginGUI {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
-											SettingsGUI window = new SettingsGUI();
+											SettingsGUI window = new SettingsGUI(conn);
 											window.getFrame().setVisible(true);
 										} catch (Exception e) {
 											e.printStackTrace();
@@ -129,7 +130,7 @@ public class LoginGUI {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
-											SettingsGUI window = new SettingsGUI();
+											SettingsGUI window = new SettingsGUI(conn);
 											window.getFrame().setVisible(true);
 										} catch (Exception e) {
 											e.printStackTrace();

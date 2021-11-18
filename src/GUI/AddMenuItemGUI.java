@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,7 +23,7 @@ public class AddMenuItemGUI {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public void AddMenuItemGUI(ArrayList<FoodItem> itemList){
+	public void AddMenuItemGUI(ArrayList<FoodItem> itemList, Connection conn){
 		JPanel contentPane;
 		JTextField textField;
 		JTextField textField_1;
@@ -96,8 +97,8 @@ public class AddMenuItemGUI {
 				int idInt = Integer.parseInt(id);//convert id to integer
 				System.out.println(isInteger(name));
 				
-				AddMenuItemFunction re = new AddMenuItemFunction();
-				if(re.idExists(idInt)==false) {
+				AddMenuItemFunction re = new AddMenuItemFunction(conn);
+				if(re.idExists(idInt, conn)==false) {
 
 				if(isInteger(name)==true) {//name cannot be an integer
 					JLayeredPane testcontentPane;//build new frame for error
@@ -128,8 +129,8 @@ public class AddMenuItemGUI {
 						}});	
 					testFrame.getRootPane().setDefaultButton(btnNewButton);
 				}else {//if name isnt a string
-						AddMenuItemFunction ne = new AddMenuItemFunction();
-				        ne.AddSingleItemtoText(idInt, name, fPrice);//add the item to our text file which also adds to fooditem list
+						AddMenuItemFunction ne = new AddMenuItemFunction(conn);
+				        ne.AddSingleItemtoText(idInt, name, fPrice, conn);//add the item to our text file which also adds to fooditem list
 				        
 						frame.dispose();
 						JPanel invalidcontentPane;
@@ -154,7 +155,7 @@ public class AddMenuItemGUI {
 							@Override
 							public void mouseClicked(MouseEvent e) {
 								invalidFrame.dispose();
-								AddMenuItemGUI(ne.FoodItems);//do again with the fooditems list		
+								AddMenuItemGUI(ne.FoodItems, conn);//do again with the fooditems list		
 							}
 						});
 						btnNewButton.setBounds(96, 47, 89, 23);
@@ -228,7 +229,7 @@ public class AddMenuItemGUI {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AddMenuItemFunction re = new AddMenuItemFunction();
+				AddMenuItemFunction re = new AddMenuItemFunction(conn);
 				re.FoodItems.clear();
 				frame.dispose();
 			}
@@ -270,7 +271,7 @@ public class AddMenuItemGUI {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						Boolean isError = false;
-						AddMenuItemFunction re = new AddMenuItemFunction();
+						AddMenuItemFunction re = new AddMenuItemFunction(conn);
 						String text = textField.getText();
 						if (text == null || text.isEmpty()) {//if text is empty, assign 9999 which will never be item id. this will then not allow you to edit blank id
 							text = "9999";
@@ -310,7 +311,7 @@ public class AddMenuItemGUI {
 						}
 						if (isError == false) {
 							
-						if(re.idExists(thisId)==true){//tests to see if the id exists in our database
+						if(re.idExists(thisId, conn)==true){//tests to see if the id exists in our database
 						String id = textField.getText();
 						int theId = Integer.parseInt(id);
 						JPanel removecontentPane;
@@ -328,7 +329,7 @@ public class AddMenuItemGUI {
 						removeFrame.setContentPane(removecontentPane);
 						removecontentPane.setLayout(null);
 						
-						FoodItem thisItem = re.GetItem(theId);
+						FoodItem thisItem = re.GetItem(theId, conn);
 						
 						JLabel lblNewLabel = new JLabel("Enter the new info for " + thisItem.getName() + " (ID= " + theId + ", Price= " + thisItem.getPrice() + ")");
 						lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -379,9 +380,9 @@ public class AddMenuItemGUI {
 									emptyIns=true;
 								}
 								
-								if(re.idExists(editId)==false||editId==9789) {
+								if(re.idExists(editId, conn)==false||editId==9789) {
 								
-								re.EditItem(theId, idString, newName, newPrice);//run the changes to the function
+								re.EditItem(theId, idString, newName, newPrice, conn);//run the changes to the function
 								removeFrame.dispose();
 								frame.dispose();
 								AddMenuItemGUI re1 = new AddMenuItemGUI();
@@ -408,7 +409,7 @@ public class AddMenuItemGUI {
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										invalidFrame.dispose();
-										re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
+										re1.AddMenuItemGUI(re.FoodItems, conn);//run our gui again with our new changes
 									}
 								});
 								btnNewButton.setBounds(96, 47, 89, 23);
@@ -416,7 +417,7 @@ public class AddMenuItemGUI {
 								
 								} else {
 									if (editId==theId) {
-										re.EditItem(theId, idString, newName, newPrice);//run the changes to the function
+										re.EditItem(theId, idString, newName, newPrice, conn);//run the changes to the function
 										removeFrame.dispose();
 										frame.dispose();
 										AddMenuItemGUI re1 = new AddMenuItemGUI();
@@ -442,7 +443,7 @@ public class AddMenuItemGUI {
 											@Override
 											public void mouseClicked(MouseEvent e) {
 												invalidFrame.dispose();
-												re1.AddMenuItemGUI(re.FoodItems);//run our gui again with our new changes
+												re1.AddMenuItemGUI(re.FoodItems, conn);//run our gui again with our new changes
 											}
 										});
 										btnNewButton.setBounds(96, 47, 89, 23);
@@ -596,8 +597,8 @@ public class AddMenuItemGUI {
 							invalidcontentPane.add(btnNewButton);
 						}
 						if(id==saveId) {}else {//our save id is our error code. if this error code is in place, dont run the remove
-						AddMenuItemFunction re = new AddMenuItemFunction();
-						boolean removed = re.RemoveItem(id);//remove the id
+						AddMenuItemFunction re = new AddMenuItemFunction(conn);
+						boolean removed = re.RemoveItem(id, conn);//remove the id
 						if (removed==false) {
 							JPanel invalidcontentPane;
 							JLabel txtYouEnteredAnd;
@@ -615,7 +616,7 @@ public class AddMenuItemGUI {
 							txtYouEnteredAnd = new JLabel();
 							txtYouEnteredAnd.setBounds(49, 11, 182, 25);
 							txtYouEnteredAnd.setFont(new Font("Tahoma", Font.PLAIN, 15));
-							txtYouEnteredAnd.setText("You entered and ID that doesnt exist");
+							txtYouEnteredAnd.setText("You entered an ID that doesnt exist");
 							invalidcontentPane.add(txtYouEnteredAnd);
 							txtYouEnteredAnd.setBounds(10, 11, 283, 28);
 							
@@ -656,7 +657,7 @@ public class AddMenuItemGUI {
 							@Override
 							public void mouseClicked(MouseEvent e) {
 								invalidFrame.dispose();
-								AddMenuItemGUI(re.FoodItems);//do again with the fooditems list		
+								AddMenuItemGUI(re.FoodItems, conn);//do again with the fooditems list		
 							}
 						});
 						btnNewButton.setBounds(96, 47, 89, 23);
