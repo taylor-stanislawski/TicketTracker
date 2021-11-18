@@ -13,3 +13,5 @@
 14 Roles 2.0
 15 Rice 4.0
 17 Sundae 6.0
+
+16 chips 16.0
