@@ -6,7 +6,5 @@ import javax.swing.JLabel;
 public class CreateTicketFunctions {
 	public Ticket newTicket;
 	
-	public void updateTicket() {
-		
-	}
+	
 }
