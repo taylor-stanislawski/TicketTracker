@@ -4,5 +4,9 @@ import Assets.*;
 import javax.swing.JLabel;
 
 public class CreateTicketFunctions {
-	//public Ticket 
+	public Ticket newTicket;
+	
+	public void updateTicket() {
+		
+	}
 }
