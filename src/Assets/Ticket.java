@@ -7,11 +7,15 @@ public class Ticket {
 	private int id;
 	private int table;
 	
-	//Constructor
+	//Constructors
 	public Ticket(int id, int table, LinkedList<FoodItem> food) {
 		this.setId(id);
 		this.setTable(table);
 		this.setFood(food);
+	}
+	
+	public Ticket() {
+		
 	}
 
 	//Start Getters and Setters
