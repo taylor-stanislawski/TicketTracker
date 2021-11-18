@@ -1,5 +1,10 @@
 package Functions;
 
-public class CreateTicketFunctions {
+import Assets.*;
+import javax.swing.JLabel;
 
+public class CreateTicketFunctions {
+	public Ticket newTicket;
+	
+	
 }
