@@ -48,9 +48,10 @@ public class CreateTicketGUI {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel createTicketLabel = new JLabel("Create Ticket");
+		createTicketLabel.setBackground(new Color(135, 206, 235));
 		createTicketLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		createTicketLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		createTicketLabel.setBounds(10, 11, 433, 34);
+		createTicketLabel.setBounds(10, 11, 433, 63);
 		frame.getContentPane().add(createTicketLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -58,27 +59,48 @@ public class CreateTicketGUI {
 		frame.getContentPane().add(scrollPane);
 		
 		itemList = new JTextArea();
+		itemList.setForeground(Color.BLUE);
 		itemList.setFont(new Font("Monospaced", Font.BOLD, 16));
 		itemList.setEditable(false);
 		scrollPane.setViewportView(itemList);
 		
 		JButton editTicketButton = new JButton("Edit Ticket");
+		editTicketButton.setBackground(new Color(211, 211, 211));
+		editTicketButton.setForeground(new Color(0, 0, 205));
 		editTicketButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Open EditTicketGUI
 			}
 		});
 		editTicketButton.setBounds(10, 90, 146, 23);
 		frame.getContentPane().add(editTicketButton);
 		
 		JButton submitTicketButton = new JButton("Submit");
+		submitTicketButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Send Ticket to Ticket Display GUI
+				//Clear current Ticket
+			}
+		});
+		submitTicketButton.setBackground(new Color(211, 211, 211));
+		submitTicketButton.setForeground(new Color(0, 128, 0));
 		submitTicketButton.setBounds(10, 124, 146, 23);
 		frame.getContentPane().add(submitTicketButton);
 		
 		JButton exitTicketButton = new JButton("Exit");
+		exitTicketButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Clear current Ticket
+				frame.dispose();
+			}
+		});
+		exitTicketButton.setBackground(new Color(211, 211, 211));
+		exitTicketButton.setForeground(new Color(165, 42, 42));
 		exitTicketButton.setBounds(10, 158, 146, 23);
 		frame.getContentPane().add(exitTicketButton);
 	}
 	
+	// MOVE THIS
 	public static void updateTicket(Ticket ticket) {
 		ArrayList<FoodItem> foodStuff = ticket.getFood();
 		String result = "";
@@ -96,6 +118,7 @@ public class CreateTicketGUI {
 			
 		}
 	}
+	// MOVE THIS
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
