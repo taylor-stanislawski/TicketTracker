@@ -5,12 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import Assets.FoodItem;
 import Assets.Ticket;
-
 import javax.swing.JList;
 import java.awt.Font;
 import javax.swing.JScrollPane;
@@ -21,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Window;
 
 public class CreateTicketGUI {
 
@@ -117,5 +116,13 @@ public class CreateTicketGUI {
 		ticket.addItemToTicket(squash);
 		ticket.addItemToTicket(carrots);
 		updateTicket(ticket);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 }

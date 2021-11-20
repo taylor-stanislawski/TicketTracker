@@ -1,50 +1,56 @@
 package Functions;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class LoginFunction {
 	
-	public static Scanner inFile;
+	public static Statement stmt = null;
+	public static ResultSet rs = null;
 	
-	public static boolean login(String ID, String pass, String role) {
-		String fileName = null;
-		short verifyUser = 0;
-		short verifyPass = 0;
-		ArrayList<String> IDList = new ArrayList<String>();
-		ArrayList<String> passList = new ArrayList<String>();
+	public static boolean login(String ID, String pass, String role, Connection conn) {
+		String verifyUser = null;
+		String verifyPass = null;
 		
-		if(role.equals("Cook")) {
-			fileName = "Cooks";
-		} else if(role.equals("Waiter")) {
-			fileName = "Waiters";
-		} else {
-			fileName = "Managers";
-		}
+		try {
+			if(role.equals("Cook")) {
+	            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        					ResultSet.CONCUR_READ_ONLY);
+	            rs = stmt.executeQuery("select *\r\n " + 
+	            					"from ticketTracker.cooks\r\n " + 
+	            					"where id = '" + ID + "' and password = '" + pass + "'");
+			} else if(role.equals("Waiter")) {
+	            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+    					ResultSet.CONCUR_READ_ONLY);
+	            rs = stmt.executeQuery("select *\r\n " + 
+								   "from ticketTracker.waiters\r\n " + 
+								   "where id = '" + ID + "' and password = '" + pass + "'");
+			} else {
+	            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+    					ResultSet.CONCUR_READ_ONLY);
+	            rs = stmt.executeQuery("select *\r\n " + 
+								   "from ticketTracker.managers\r\n " + 
+								   "where id = '" + ID + "' and password = '" + pass + "'");
+			}
+		} catch (SQLException e) {
+            //print SQL errors
+            e.printStackTrace();
+        }
 				
 		try {
-			inFile = new Scanner( new File( fileName ) );
-			
-			while( inFile.hasNextLine() ) {	      
-		         IDList.add( inFile.next() );  //add the employee id to list
-		         passList.add( inFile.next() );  //add the employee password to list
-		      }
-		      
-		     inFile.close();
-		      
-		} catch (FileNotFoundException e) {
+			if(rs.next() == false) {
+		      } else {
+		    	verifyUser = rs.getString(1);
+		    	verifyPass = rs.getString(2);
+		    }		      
+		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		
-		for (int i = 0; i < IDList.size(); i++) {
-			if( ID.equals(IDList.get(i)) && pass.equals(passList.get(i)) ) {
-				verifyUser = 1;
-				verifyPass = 1;
-			}
-		}
 
-		if(verifyUser != 0 && verifyPass != 0) {
+		if(verifyUser != null && verifyPass != null ) {
 			return true;
 		} else {
 			return false;
