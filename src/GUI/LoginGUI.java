@@ -82,7 +82,7 @@ public class LoginGUI {
 					if(cookButton.isSelected()) {
 						try {
 							//open cook window
-							if(LoginFunction.login(ID, pass, "Cook") == true) {
+							if(LoginFunction.login(ID, pass, "Cook", conn) == true) {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
@@ -104,11 +104,11 @@ public class LoginGUI {
 					else if(waiterButton.isSelected()) {
 						//open Waiter window
 						try {
-							if(LoginFunction.login(ID, pass, "Waiter") == true) {
+							if(LoginFunction.login(ID, pass, "Waiter", conn) == true) {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
-											SettingsGUI window = new SettingsGUI(conn);
+											CreateTicketGUI window = new CreateTicketGUI();
 											window.getFrame().setVisible(true);
 										} catch (Exception e) {
 											e.printStackTrace();
@@ -126,7 +126,7 @@ public class LoginGUI {
 					else if(managerButton.isSelected()) {
 						//open Manager window
 						try {
-							if(LoginFunction.login(ID, pass, "Manager") == true) {
+							if(LoginFunction.login(ID, pass, "Manager", conn) == true) {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {

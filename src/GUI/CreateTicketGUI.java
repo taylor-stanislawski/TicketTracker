@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import java.awt.Font;
+import java.awt.Window;
 
 public class CreateTicketGUI {
 
@@ -51,5 +52,13 @@ public class CreateTicketGUI {
 		frame.getContentPane().add(createTicketLabel);
 		
 		JList<String> addedItems = new JList<>();
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 }
