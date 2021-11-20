@@ -1,14 +1,15 @@
 package Assets;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Ticket {
-	private LinkedList<FoodItem> food;
+	private ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 	private int id;
 	private int table;
 	
 	//Constructors
-	public Ticket(int id, int table, LinkedList<FoodItem> food) {
+	public Ticket(int id, int table, ArrayList<FoodItem> food) {
 		this.setId(id);
 		this.setTable(table);
 		this.setFood(food);
@@ -19,11 +20,11 @@ public class Ticket {
 	}
 
 	//Start Getters and Setters
-	public LinkedList<FoodItem> getFood() {
+	public ArrayList<FoodItem> getFood() {
 		return food;
 	}
 
-	public void setFood(LinkedList<FoodItem> food) {
+	public void setFood(ArrayList<FoodItem> food) {
 		this.food = food;
 	}
 
