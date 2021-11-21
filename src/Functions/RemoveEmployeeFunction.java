@@ -4,37 +4,71 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.Scanner;
 import Assets.Employee;
 
 public class RemoveEmployeeFunction {
-	public static String remove(String id, File file) throws IOException {
+	
+	public static Statement stmt = null;
+	public static ResultSet rs = null;
+	
+	public static String remove(String id, int type, Connection conn) throws IOException {
 		String message = "";
-		LinkedList<Employee> empList = new LinkedList<>();
-		Scanner readFile = new Scanner(file);
-		while(readFile.hasNextLine()) {
-			String readId = readFile.next();
-			String readPwd = readFile.next();			
-			if(!readId.equals(id)) {
-				empList.add(new Employee(readId, readPwd));
+		try {
+			if(type == 0) {
+				if(RegisterFunction.checkId(id, 0, conn) == false) {
+					stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        										ResultSet.CONCUR_READ_ONLY);
+					stmt.executeUpdate("DELETE FROM ticketTracker.cooks\r\n " + 
+							   "WHERE id = '" + id + "'");
+					message = "Successfully removed: ID: '" + id;
+					System.out.println("Successfully removed: ID: '" + id);
+				}
+				else {
+					message = "Id '" + id + "' already exists";
+					System.out.println("Id '" + id + "' already exists");
+				}
+			}
+			else if(type == 1) {
+				if(RegisterFunction.checkId(id, 1, conn) == false) {
+					stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        										ResultSet.CONCUR_READ_ONLY);
+					stmt.executeUpdate("DELETE FROM ticketTracker.waiters\r\n " + 
+									   "WHERE id = '" + id + "'");
+					message = "Successfully removed: ID: '" + id;
+					System.out.println("Successfully removed: ID: '" + id);
+				}
+				else {
+					message = "Id '" + id + "' already exists";
+					System.out.println("Id '" + id + "' already exists");
+				}
+			}
+			else if(type == 2) {
+				if(RegisterFunction.checkId(id, 2, conn) == false) {
+					stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        										ResultSet.CONCUR_READ_ONLY);
+					stmt.executeUpdate("DELETE FROM ticketTracker.managers\r\n " + 
+							   		   "WHERE id = '" + id + "'");
+					message = "Successfully removed: ID: '" + id;
+					System.out.println("Successfully removed: ID: '" + id);
+				}
+				else {
+					message = "Id '" + id + "' already exists";
+					System.out.println("Id '" + id + "' already exists");
+				}
 			}
 			else {
-				message = "Successfully removed: '" + id + "'";
+				System.out.println("Invalid Employee Type");
 			}
-		}
-		FileWriter writer = new FileWriter(file, false);
-		for(int i = 0; i < empList.size(); i++) {
-			if(i == empList.size() - 1) {
-				writer.write(empList.get(i).getId() + " " + empList.get(i).getPwd());
-			}
-			else {
-				writer.write(empList.get(i).getId() + " " + empList.get(i).getPwd() + "\n");
-			}
-		}
-		
-		writer.close();
-		readFile.close();
+		} catch (SQLException e) {
+            //print SQL errors
+            e.printStackTrace();
+        }
 		
 		return message;
 	}

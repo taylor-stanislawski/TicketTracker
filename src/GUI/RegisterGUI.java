@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.sql.Connection;
 
 import Functions.RegisterFunction;
 import java.awt.event.ActionListener;
@@ -23,33 +24,11 @@ public class RegisterGUI {
 	private JTextField idTextfield;
 	private JTextField pwdTextfield;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegisterGUI window = new RegisterGUI();
-					window.getFrame().setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public RegisterGUI(Connection conn) {
+		initialize(conn);
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public RegisterGUI() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	private void initialize(Connection conn) {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 442, 346);
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -108,25 +87,22 @@ public class RegisterGUI {
 				String registerMessage = "";
 				if(cookButton.isSelected()) {
 					try {
-						registerMessage = RegisterFunction.register(idTextfield.getText(), pwdTextfield.getText(), 0);
+						registerMessage = RegisterFunction.register(idTextfield.getText(), pwdTextfield.getText(), 0, conn);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 				else if(waiterButton.isSelected()) {
 					try {
-						registerMessage = RegisterFunction.register(idTextfield.getText(), pwdTextfield.getText(), 1);
+						registerMessage = RegisterFunction.register(idTextfield.getText(), pwdTextfield.getText(), 1, conn);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 				else {
 					try {
-						registerMessage = RegisterFunction.register(idTextfield.getText(), pwdTextfield.getText(), 2);
+						registerMessage = RegisterFunction.register(idTextfield.getText(), pwdTextfield.getText(), 2, conn);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}

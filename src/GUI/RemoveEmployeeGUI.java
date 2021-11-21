@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 
 import Functions.RemoveEmployeeFunction;
 
@@ -23,32 +24,16 @@ public class RemoveEmployeeGUI {
 	private JTextField idTextfield;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RemoveEmployeeGUI window = new RemoveEmployeeGUI();
-					window.getFrame().setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
-	public RemoveEmployeeGUI() {
-		initialize();
+	public RemoveEmployeeGUI(Connection conn) {
+		initialize(conn);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Connection conn) {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 500, 350);
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -100,7 +85,7 @@ public class RemoveEmployeeGUI {
 				if(cookButton.isSelected()) {
 					File file = new File("Cooks");
 					try {
-						message = RemoveEmployeeFunction.remove(idTextfield.getText(), file);
+						message = RemoveEmployeeFunction.remove(idTextfield.getText(), 0, conn);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -109,7 +94,7 @@ public class RemoveEmployeeGUI {
 				else if(cookButton.isSelected()) {
 					File file = new File("Waiters");
 					try {
-						message = RemoveEmployeeFunction.remove(idTextfield.getText(), file);
+						message = RemoveEmployeeFunction.remove(idTextfield.getText(), 1, conn);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -118,7 +103,7 @@ public class RemoveEmployeeGUI {
 				else {
 					File file = new File("Managers");
 					try {
-						message = RemoveEmployeeFunction.remove(idTextfield.getText(), file);
+						message = RemoveEmployeeFunction.remove(idTextfield.getText(), 2, conn);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

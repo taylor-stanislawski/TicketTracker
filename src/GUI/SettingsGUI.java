@@ -19,19 +19,10 @@ public class SettingsGUI {
 
 	private JFrame frame;
 
-
-
-	/**
-	 * Create the application.
-	 * @param conn 
-	 */
 	public SettingsGUI(Connection conn) {
 		initialize(conn);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize(Connection conn) {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 469, 276);
@@ -68,7 +59,7 @@ public class SettingsGUI {
 		addEmployeeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				RegisterGUI register = new RegisterGUI();
+				RegisterGUI register = new RegisterGUI(conn);
 				register.getFrame().setVisible(true);
 			}
 		});
@@ -79,7 +70,7 @@ public class SettingsGUI {
 		removeEmployeeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				RemoveEmployeeGUI remove = new RemoveEmployeeGUI();
+				RemoveEmployeeGUI remove = new RemoveEmployeeGUI(conn);
 				remove.getFrame().setVisible(true);
 			}
 		});
