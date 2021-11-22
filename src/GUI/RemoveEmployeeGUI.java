@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -36,6 +37,7 @@ public class RemoveEmployeeGUI {
 	private void initialize(Connection conn) {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 500, 350);
+		frame.getContentPane().setBackground(new Color(135, 206, 235));
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame().getContentPane().setLayout(null);
 		
@@ -62,17 +64,20 @@ public class RemoveEmployeeGUI {
 		ButtonGroup group = new ButtonGroup();
 		
 		JRadioButton cookButton = new JRadioButton("Cook");
+		cookButton.setBackground(new Color(135, 206, 235));
 		cookButton.setSelected(true);
 		cookButton.setBounds(187, 166, 109, 23);
 		getFrame().getContentPane().add(cookButton);
 		group.add(cookButton);
 		
 		JRadioButton waiterButton = new JRadioButton("Waiter");
+		waiterButton.setBackground(new Color(135, 206, 235));
 		waiterButton.setBounds(187, 192, 109, 23);
 		getFrame().getContentPane().add(waiterButton);
 		group.add(waiterButton);
 		
 		JRadioButton managerButton = new JRadioButton("Manager");
+		managerButton.setBackground(new Color(135, 206, 235));
 		managerButton.setBounds(187, 218, 109, 23);
 		getFrame().getContentPane().add(managerButton);
 		group.add(managerButton);

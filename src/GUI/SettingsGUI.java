@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -26,6 +27,7 @@ public class SettingsGUI {
 	private void initialize(Connection conn) {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 469, 276);
+		frame.getContentPane().setBackground(new Color(135, 206, 235));
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame().getContentPane().setLayout(null);
 		

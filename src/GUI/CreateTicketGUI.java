@@ -43,6 +43,7 @@ public class CreateTicketGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(135, 206, 235));
 		frame.setBounds(100, 100, 469, 452);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

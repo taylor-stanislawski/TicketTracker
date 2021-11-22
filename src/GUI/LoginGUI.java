@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
+import java.awt.Font;
+import java.awt.Color;
 
 public class LoginGUI {
 
@@ -24,53 +26,56 @@ public class LoginGUI {
 	
 	private void initialize(Connection conn) {
 		setFrame(new JFrame());
-		getFrame().setBounds(100, 100, 353, 442);
+		getFrame().setBounds(100, 100, 354, 386);
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame().getContentPane().setLayout(null);
 		
-		JLabel ticketLabel = new JLabel("Ticket Tracker Login");
+		JLabel ticketLabel = new JLabel("Login");
+		ticketLabel.setBackground(new Color(0, 0, 0));
+		ticketLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		ticketLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		ticketLabel.setBounds(55, 0, 213, 26);
+		ticketLabel.setBounds(10, 0, 317, 46);
 		frame.getContentPane().add(ticketLabel);
 		getFrame().getContentPane().add(ticketLabel);
 		
+		JLabel loginLabel = new JLabel("");
+		loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		loginLabel.setBounds(76, 47, 186, 18);
+		frame.getContentPane().add(loginLabel);
+		
 		JLabel IDLabel = new JLabel("Employee ID:");
-		IDLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		IDLabel.setBounds(86, 34, 150, 26);
+		IDLabel.setBounds(76, 76, 186, 18);
 		frame.getContentPane().add(IDLabel);
 		getFrame().getContentPane().add(IDLabel);
 		
 		JTextField IDField = new JTextField();
-		IDField.setBounds(68, 61, 186, 32);
+		IDField.setBounds(76, 93, 186, 26);
 		getFrame().getContentPane().add(IDField);
 		IDField.setColumns(10);
 		
 		JLabel passLabel = new JLabel("Password:");
-		passLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		passLabel.setBounds(101, 107, 121, 26);
+		passLabel.setBounds(76, 134, 186, 18);
 		frame.getContentPane().add(passLabel);
 		getFrame().getContentPane().add(passLabel);
 		
 		JTextField passField = new JTextField();
-		passField.setBounds(68, 136, 186, 32);
+		passField.setBounds(76, 151, 186, 26);
 		getFrame().getContentPane().add(passField);
 		passField.setColumns(10);
 		
-		JLabel loginLabel = new JLabel("");
-		loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		loginLabel.setBounds(86, 339, 150, 26);
-		frame.getContentPane().add(loginLabel);
-		
 		JRadioButton cookButton = new JRadioButton("Cook");
-		cookButton.setBounds(63, 232, 201, 35);
+		cookButton.setBackground(new Color(135, 206, 235));
+		cookButton.setBounds(76, 184, 186, 31);
 		frame.getContentPane().add(cookButton);
 		
 		JRadioButton waiterButton = new JRadioButton("Waiter");
-		waiterButton.setBounds(63, 266, 201, 35);
+		waiterButton.setBackground(new Color(135, 206, 235));
+		waiterButton.setBounds(76, 218, 186, 32);
 		frame.getContentPane().add(waiterButton);
 		
 		JRadioButton managerButton = new JRadioButton("Manager");
-		managerButton.setBounds(63, 301, 201, 35);
+		managerButton.setBackground(new Color(135, 206, 235));
+		managerButton.setBounds(76, 253, 186, 31);
 		frame.getContentPane().add(managerButton);
 		
 		JButton loginButton = new JButton("Login");
@@ -151,7 +156,7 @@ public class LoginGUI {
 				}
 
 		});
-		loginButton.setBounds(91, 180, 141, 35);
+		loginButton.setBounds(98, 301, 141, 26);
 		frame.getContentPane().add(loginButton);
 		getFrame().getContentPane().add(loginButton);
 		
@@ -159,7 +164,6 @@ public class LoginGUI {
 		group.add(cookButton);
 		group.add(waiterButton);
 		group.add(managerButton);
-
 	}
 
 	public JFrame getFrame() {
@@ -168,5 +172,6 @@ public class LoginGUI {
 
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
+		frame.getContentPane().setBackground(new Color(135, 206, 235));
 	}
 }

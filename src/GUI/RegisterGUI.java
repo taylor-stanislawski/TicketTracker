@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,6 +32,7 @@ public class RegisterGUI {
 	private void initialize(Connection conn) {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 442, 346);
+		frame.getContentPane().setBackground(new Color(135, 206, 235));
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame().getContentPane().setLayout(null);
 		
@@ -41,14 +43,17 @@ public class RegisterGUI {
 		getFrame().getContentPane().add(registerLabel);
 		
 		JRadioButton cookButton = new JRadioButton("Cook");
+		cookButton.setBackground(new Color(135, 206, 235));
 		cookButton.setBounds(158, 172, 109, 23);
 		getFrame().getContentPane().add(cookButton);
 		
 		JRadioButton waiterButton = new JRadioButton("Waiter");
+		waiterButton.setBackground(new Color(135, 206, 235));
 		waiterButton.setBounds(158, 198, 109, 23);
 		getFrame().getContentPane().add(waiterButton);
 		
 		JRadioButton managerButton = new JRadioButton("Manager");
+		managerButton.setBackground(new Color(135, 206, 235));
 		managerButton.setBounds(158, 224, 109, 23);
 		getFrame().getContentPane().add(managerButton);
 		
