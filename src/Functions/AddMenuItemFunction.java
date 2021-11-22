@@ -135,7 +135,7 @@ public class AddMenuItemFunction {
         }
 	}
 	
-	public void AddItemsFromText(String fileName, Connection conn) throws IOException {//read text file and import fooditems
+	public void AddItemsFromText(Connection conn) throws IOException {//read database and import fooditems
 
     FoodItems.clear();
     try {

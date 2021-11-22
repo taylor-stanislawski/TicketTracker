@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import Assets.FoodItem;
 import Assets.Ticket;
+import Functions.AddMenuItemFunction;
+import Functions.CreateTicketFunctions;
+
 import javax.swing.JList;
 import java.awt.Font;
 import javax.swing.JScrollPane;
@@ -18,6 +21,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.sql.Connection;
 import java.awt.event.ActionEvent;
 import java.awt.Window;
 
@@ -34,14 +41,14 @@ public class CreateTicketGUI {
 	/**
 	 * Create the application.
 	 */
-	public CreateTicketGUI() {
-		initialize();
+	public CreateTicketGUI(Connection conn, Ticket ticket) {
+		initialize(conn, ticket);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Connection conn, Ticket ticket) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(135, 206, 235));
 		frame.setBounds(100, 100, 469, 452);
@@ -68,12 +75,26 @@ public class CreateTicketGUI {
 		JButton editTicketButton = new JButton("Edit Ticket");
 		editTicketButton.setBackground(new Color(211, 211, 211));
 		editTicketButton.setForeground(new Color(0, 0, 205));
-		editTicketButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Open EditTicketGUI
+		editTicketButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddMenuItemFunction re = new AddMenuItemFunction(conn);
+				   try {
+					   re.AddItemsFromText(conn);
+				   } catch (IOException e1) {
+					   e1.printStackTrace();
+				   }
+				
+				Ticket myTicket = new Ticket();
+				EditTicketGUI re1 = new EditTicketGUI();
+				                    re1.EditTicketGUI(re.FoodItems, conn, myTicket);//run gui with fooditems list
+				CreateTicketFunctions.updateTicket(myTicket);
+				itemList.setText(ticket.toString());
+
+
 			}
 		});
-		editTicketButton.setBounds(10, 90, 146, 23);
+		editTicketButton.setBounds(10, 86, 146, 23);
 		frame.getContentPane().add(editTicketButton);
 		
 		JButton submitTicketButton = new JButton("Submit");
@@ -85,7 +106,7 @@ public class CreateTicketGUI {
 		});
 		submitTicketButton.setBackground(new Color(211, 211, 211));
 		submitTicketButton.setForeground(new Color(0, 128, 0));
-		submitTicketButton.setBounds(10, 124, 146, 23);
+		submitTicketButton.setBounds(10, 130, 146, 23);
 		frame.getContentPane().add(submitTicketButton);
 		
 		JButton exitTicketButton = new JButton("Exit");
@@ -97,35 +118,15 @@ public class CreateTicketGUI {
 		});
 		exitTicketButton.setBackground(new Color(211, 211, 211));
 		exitTicketButton.setForeground(new Color(165, 42, 42));
-		exitTicketButton.setBounds(10, 158, 146, 23);
+		exitTicketButton.setBounds(10, 177, 146, 23);
 		frame.getContentPane().add(exitTicketButton);
 	}
 	
-	// MOVE THIS
-	public static void updateTicket(Ticket ticket) {
-		ArrayList<FoodItem> foodStuff = ticket.getFood();
-		String result = "";
-		for(int i = 0; i < ticket.getFood().size(); i++) {
-			if(i == 0) {
-				System.out.println("Option 1: " + i);
-				result = foodStuff.get(i).getName() + " : " + foodStuff.get(i).getPrice();
-				itemList.setText(result);
-			}
-			else {
-				System.out.println("Option 2: " + i);
-				result += "\n" + foodStuff.get(i).getName() + " : " + foodStuff.get(i).getPrice();
-				itemList.setText(result);
-			}
-			
-		}
-	}
-	// MOVE THIS
-	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateTicketGUI window = new CreateTicketGUI();
+					CreateTicketGUI window = new CreateTicketGUI(conn);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -141,12 +142,18 @@ public class CreateTicketGUI {
 		ticket.addItemToTicket(carrots);
 		updateTicket(ticket);
 	}
-
+*/
+	
 	public JFrame getFrame() {
 		return frame;
 	}
 
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
+	}
+	
+	public static void updateText(Ticket ticket) {
+		CreateTicketFunctions.updateTicket(ticket);
+		itemList.setText(ticket.toString());
 	}
 }
