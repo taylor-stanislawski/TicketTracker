@@ -42,13 +42,11 @@ public class SettingsGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				AddMenuItemFunction re = new AddMenuItemFunction(conn);
-				String fileName = "MenuItemList.txt";
-				                    try {
-										re.AddItemsFromText(fileName, conn);
-									} catch (IOException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
+				   try {
+					   re.AddItemsFromText(conn);
+				   } catch (IOException e1) {
+					   e1.printStackTrace();
+				   }
 
 				AddMenuItemGUI re1 = new AddMenuItemGUI();
 				                    re1.AddMenuItemGUI(re.FoodItems, conn);//run gui with fooditems list

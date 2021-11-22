@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+
+import Assets.Ticket;
 import Functions.LoginFunction;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
@@ -113,7 +115,8 @@ public class LoginGUI {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
-											CreateTicketGUI window = new CreateTicketGUI();
+											Ticket ticket = new Ticket();
+											CreateTicketGUI window = new CreateTicketGUI(conn, ticket);
 											window.getFrame().setVisible(true);
 										} catch (Exception e) {
 											e.printStackTrace();
