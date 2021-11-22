@@ -32,6 +32,7 @@ public class CreateTicketGUI {
 
 	private JFrame frame;
 	public static JTextArea itemList = new JTextArea();
+	public static Ticket myTicket = new Ticket();
 
 	/**
 	 * Launch the application.
@@ -41,14 +42,14 @@ public class CreateTicketGUI {
 	/**
 	 * Create the application.
 	 */
-	public CreateTicketGUI(Connection conn, Ticket ticket) {
-		initialize(conn, ticket);
+	public CreateTicketGUI(Connection conn) {
+		initialize(conn);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Connection conn, Ticket ticket) {
+	private void initialize(Connection conn) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(135, 206, 235));
 		frame.setBounds(100, 100, 469, 452);
@@ -85,11 +86,10 @@ public class CreateTicketGUI {
 					   e1.printStackTrace();
 				   }
 				
-				Ticket myTicket = new Ticket();
 				EditTicketGUI re1 = new EditTicketGUI();
 				                    re1.EditTicketGUI(re.FoodItems, conn, myTicket);//run gui with fooditems list
 				CreateTicketFunctions.updateTicket(myTicket);
-				itemList.setText(ticket.toString());
+				itemList.setText(myTicket.toString());
 
 
 			}
@@ -100,6 +100,9 @@ public class CreateTicketGUI {
 		JButton submitTicketButton = new JButton("Submit");
 		submitTicketButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CreateTicketFunctions.insertTicket(myTicket, conn);
+				itemList.setText("");
+				myTicket.setFood(null);
 				//Send Ticket to Ticket Display GUI
 				//Clear current Ticket
 			}
@@ -155,5 +158,6 @@ public class CreateTicketGUI {
 	public static void updateText(Ticket ticket) {
 		CreateTicketFunctions.updateTicket(ticket);
 		itemList.setText(ticket.toString());
+		myTicket = ticket;
 	}
 }

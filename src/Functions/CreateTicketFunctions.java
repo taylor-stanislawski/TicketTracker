@@ -55,4 +55,30 @@ public class CreateTicketFunctions {
 		
 		return newItem;
 	}
+	
+	public static void insertTicket(Ticket ticket, Connection conn) {
+		int maxNum = 0;
+		String orderData = "";
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery("SELECT MAX(number) + 1 AS Number FROM ticketTracker.ticket;");
+			while(rs.next()) {
+				maxNum = rs.getInt(1);
+			}
+			
+			for(int i=0;i<ticket.getFood().size();i++) {
+				orderData = orderData + ticket.getFood().get(i).getName() + "\n ";
+			}
+			
+			stmt.executeUpdate("insert into ticketTracker.ticket\r\n " + 
+							  "VALUES(" + maxNum + ",\r\n " + 
+							  "		  '" +  orderData  +"', false, CURRENT_TIMESTAMP);");
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+	}
 }

@@ -22,6 +22,7 @@ import Functions.CreateTicketFunctions;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class EditTicketGUI {
 	/**
@@ -45,6 +46,7 @@ public class EditTicketGUI {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -96,7 +98,6 @@ public class EditTicketGUI {
 				
 				}else {
 			//	}
-				System.out.println(thisId);
 				FoodItem thisItem = itemList.get(thisId);
 				JPanel removecontentPane;
 				JTextField textField;
@@ -114,7 +115,6 @@ public class EditTicketGUI {
 						int theId = thisItem.getId();
 						ticket.addItemToTicket(itemList.get(thisId));
 						CreateTicketGUI.updateText(ticket);
-						System.out.println(ticket.toString());
 					
 						
 				}else{//if id didnt exist

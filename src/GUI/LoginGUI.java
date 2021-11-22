@@ -116,7 +116,7 @@ public class LoginGUI {
 									public void run() {
 										try {
 											Ticket ticket = new Ticket();
-											CreateTicketGUI window = new CreateTicketGUI(conn, ticket);
+											CreateTicketGUI window = new CreateTicketGUI(conn);
 											window.getFrame().setVisible(true);
 										} catch (Exception e) {
 											e.printStackTrace();
