@@ -88,4 +88,14 @@ public class Ticket {
 		return result;
 	}
 	
+	public String toStringGUI() {
+		String result = "";
+		result += "Ticket ID: " +  this.id;
+		//		"Ticket Table: " + this.table + "\n";
+		for(int i = 0; i < this.food.size(); i++) {
+			result += this.food.get(i).toStringGUI() + "\n";
+		}
+		return result;
+	}
+	
 }
