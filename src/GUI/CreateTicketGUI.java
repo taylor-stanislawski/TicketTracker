@@ -121,7 +121,7 @@ public class CreateTicketGUI {
 		});
 		submitTicketButton.setBackground(new Color(211, 211, 211));
 		submitTicketButton.setForeground(new Color(0, 128, 0));
-		submitTicketButton.setBounds(10, 130, 146, 23);
+		submitTicketButton.setBounds(10, 172, 146, 23);
 		frame.getContentPane().add(submitTicketButton);
 		
 		JButton exitTicketButton = new JButton("Exit");
@@ -134,8 +134,21 @@ public class CreateTicketGUI {
 		});
 		exitTicketButton.setBackground(new Color(211, 211, 211));
 		exitTicketButton.setForeground(new Color(165, 42, 42));
-		exitTicketButton.setBounds(10, 177, 146, 23);
+		exitTicketButton.setBounds(10, 216, 146, 23);
 		frame.getContentPane().add(exitTicketButton);
+		
+		JButton btnClearTicket = new JButton("Clear Ticket");
+		btnClearTicket.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				myTicket.clearTicket();
+				itemList.setText("");
+			}
+		});
+		btnClearTicket.setForeground(Color.GRAY);
+		btnClearTicket.setBackground(new Color(211, 211, 211));
+		btnClearTicket.setBounds(10, 130, 146, 23);
+		frame.getContentPane().add(btnClearTicket);
 	}
 	
 /*	public static void main(String[] args) {

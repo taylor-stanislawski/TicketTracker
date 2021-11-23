@@ -79,7 +79,7 @@ public class Ticket {
 	
 	public String toString() {
 		String result = "";
-		result += "Ticket ID: " +  this.id + "\n--------------------------------------------------" ;
+		result += "Ticket ID: " +  this.id + "\n--------------------------------------------------\n" ;
 		//		"Ticket Table: " + this.table + "\n";
 		for(int i = 0; i < this.food.size(); i++) {
 			result += this.food.get(i).toString() + "\n" +
