@@ -134,7 +134,7 @@ public class EditTicketGUI {
 						txtYouEnteredAnd = new JLabel();
 						txtYouEnteredAnd.setBounds(49, 11, 182, 25);
 						txtYouEnteredAnd.setFont(new Font("Tahoma", Font.PLAIN, 15));
-						txtYouEnteredAnd.setText("You entered and invalid ID");
+						txtYouEnteredAnd.setText("You entered an invalid ID");
 						invalidcontentPane.add(txtYouEnteredAnd);
 						txtYouEnteredAnd.setBounds(20, 11, 262, 14);
 						
@@ -215,7 +215,7 @@ public class EditTicketGUI {
 						} else {
 						FoodItem thisItem = itemList.get(id);
 						System.out.println(id);
-						boolean removed = re.RemoveItem(thisItem.getId(), conn);//remove the id
+						boolean removed = re.idExists(thisItem.getId(), conn);//remove the id
 						if (removed==false) {
 							JPanel invalidcontentPane;
 							JLabel txtYouEnteredAnd;
@@ -233,7 +233,7 @@ public class EditTicketGUI {
 							txtYouEnteredAnd = new JLabel();
 							txtYouEnteredAnd.setBounds(49, 11, 182, 25);
 							txtYouEnteredAnd.setFont(new Font("Tahoma", Font.PLAIN, 15));
-							txtYouEnteredAnd.setText("You entered and ID that doesnt exist");
+							txtYouEnteredAnd.setText("You entered an ID that doesnt exist");
 							invalidcontentPane.add(txtYouEnteredAnd);
 							txtYouEnteredAnd.setBounds(10, 11, 283, 28);
 							
@@ -247,6 +247,10 @@ public class EditTicketGUI {
 							btnNewButton.setBounds(96, 47, 89, 23);
 							invalidcontentPane.add(btnNewButton);
 						} else {
+							int thisId=displayList.getSelectedIndex();
+							int theId = thisItem.getId();
+							ticket.removeItemFromTicket(itemList.get(thisId).getName());
+							CreateTicketGUI.updateText(ticket);
 						frame.dispose();
 						AddMenuItemGUI re1 = new AddMenuItemGUI();
 						

@@ -78,7 +78,47 @@ public class CreateTicketFunctions {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+	
+	}
+	
+	public static ArrayList<Ticket> retrieveTicket(Connection conn) {
+		int ticketNum = 0;
+		String orderData = null;
+		ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+		ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery("Select number,data from ticketTracker.ticket\r\n " + 
+								   "WHERE state = 0 order by number asc;");
+			while(rs.next()) {
+				Ticket ticket = new Ticket();
+				ticketNum = rs.getInt(1);
+				orderData = rs.getString(2);
+					ticket.setId(ticketNum);
+					foodList.add(new FoodItem(0, orderData, 0));
+					ticket.setFood(foodList);
+					ticketList.add(ticket);
+					System.out.println(ticket.getFood().get(0).getName());
+				orderData = null;
+			}
 		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ticketList;
+	}
+	
+	public static void setTicketComplete(int id, Connection conn) {
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			stmt.executeUpdate("UPDATE ticketTracker.ticket\r\n " + 
+									"SET state = 1\r\n " + 
+									"WHERE number = " + id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

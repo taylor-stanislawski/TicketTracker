@@ -6,12 +6,12 @@ import java.util.LinkedList;
 public class Ticket {
 	private ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 	private int id;
-	private int table;
+	//private int table;
 	
 	//Constructors
-	public Ticket(int id, int table, ArrayList<FoodItem> food) {
+	public Ticket(int id,  ArrayList<FoodItem> food) {
 		this.setId(id);
-		this.setTable(table);
+		//this.setTable(table);
 		this.setFood(food);
 	}
 	
@@ -36,13 +36,13 @@ public class Ticket {
 		this.id = id;
 	}
 
-	public int getTable() {
-		return table;
-	}
+	//public int getTable() {
+	//	return table;
+	//}
 
-	public void setTable(int table) {
-		this.table = table;
-	}
+	//public void setTable(int table) {
+	//	this.table = table;
+	//}
 	//End Getters and Setters
 	
 	
@@ -62,6 +62,7 @@ public class Ticket {
 			if(food.get(count).getName().equals(itemName)) {
 				food.remove(food.get(count));
 			}
+			count++;
 		}
 	}
 	
@@ -71,14 +72,15 @@ public class Ticket {
 		while(count < food.size()) {
 			if(food.get(count).getId() == id) {
 				food.remove(food.get(count));
+				count ++;
 			}
 		}
 	}
 	
 	public String toString() {
 		String result = "";
-		result += "Ticket ID: " +  this.id + "\n" +
-				"Ticket Table: " + this.table + "\n";
+		result += "Ticket ID: " +  this.id + "\n--------------------------------------------------" ;
+		//		"Ticket Table: " + this.table + "\n";
 		for(int i = 0; i < this.food.size(); i++) {
 			result += this.food.get(i).toString() + "\n" +
 					"--------------------------------------------------\n";

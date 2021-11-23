@@ -53,7 +53,7 @@ public class CreateTicketGUI {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(135, 206, 235));
 		frame.setBounds(100, 100, 469, 452);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel createTicketLabel = new JLabel("Create Ticket");
@@ -85,11 +85,16 @@ public class CreateTicketGUI {
 				   } catch (IOException e1) {
 					   e1.printStackTrace();
 				   }
-				
 				EditTicketGUI re1 = new EditTicketGUI();
 				                    re1.EditTicketGUI(re.FoodItems, conn, myTicket);//run gui with fooditems list
-				CreateTicketFunctions.updateTicket(myTicket);
-				itemList.setText(myTicket.toString());
+				   try {
+					   CreateTicketFunctions.updateTicket(myTicket);
+						itemList.setText(myTicket.toString());
+				   } catch (NullPointerException e1) {
+					   e1.printStackTrace();
+					   System.out.println("No ticket");
+				   }				                    
+
 
 
 			}
@@ -100,9 +105,16 @@ public class CreateTicketGUI {
 		JButton submitTicketButton = new JButton("Submit");
 		submitTicketButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CreateTicketFunctions.insertTicket(myTicket, conn);
+				try {
+					if(myTicket.getFood().get(0).getName() != null) {
+						CreateTicketFunctions.insertTicket(myTicket, conn);
+					}
+				} catch(IndexOutOfBoundsException e2) {
+					itemList.setText("No Items in Ticket");
+				}
+				
 				itemList.setText("");
-				myTicket.setFood(null);
+				myTicket.clearTicket();
 				//Send Ticket to Ticket Display GUI
 				//Clear current Ticket
 			}
@@ -116,6 +128,7 @@ public class CreateTicketGUI {
 		exitTicketButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Clear current Ticket
+				myTicket.clearTicket();
 				frame.dispose();
 			}
 		});

@@ -93,7 +93,7 @@ public class LoginGUI {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
-											SettingsGUI window = new SettingsGUI(conn);
+											DisplayTicketGUI window = new DisplayTicketGUI(conn);
 											window.getFrame().setVisible(true);
 										} catch (Exception e) {
 											e.printStackTrace();
