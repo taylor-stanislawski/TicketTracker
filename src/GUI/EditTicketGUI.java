@@ -44,7 +44,7 @@ public class EditTicketGUI {
 		}
 		
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 550, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,13 +53,13 @@ public class EditTicketGUI {
 		
 		JList<String> displayList = new JList<>(itemTexts.toArray(new String[0]));//displayable list of our fooditems
 		JScrollPane scrollPane = new JScrollPane(displayList);//adding to our scrollpane
-		scrollPane.setBounds(8, 0, 275, 229);
+		scrollPane.setBounds(8, 0, 365, 229);
 		contentPane.add(scrollPane);
 		
-		JButton btnRemove = new JButton("Remove from Ticket");//removing item button
+		JButton btnRemove = new JButton("Remove");//removing item button
 		
-		JButton btnEdit = new JButton("Add to Ticket");//add button for adding to ticket
-		btnEdit.setBounds(294, 54, 109, 23);
+		JButton btnEdit = new JButton("Add");//add button for adding to ticket
+		btnEdit.setBounds(384, 54, 129, 23);
 		contentPane.add(btnEdit);
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -155,7 +155,7 @@ public class EditTicketGUI {
 		});
 		
 		JButton btnNewButton_1 = new JButton("Save and Exit");//cancel button for main menu
-		btnNewButton_1.setBounds(294, 120, 109, 23);
+		btnNewButton_1.setBounds(384, 120, 129, 23);
 		contentPane.add(btnNewButton_1);
 		
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
@@ -168,7 +168,7 @@ public class EditTicketGUI {
 		});
 		
 		
-		btnRemove.setBounds(294, 86, 109, 23);
+		btnRemove.setBounds(384, 86, 129, 23);
 		contentPane.add(btnRemove);
 		btnRemove.addMouseListener(new MouseAdapter() {
 			@Override
